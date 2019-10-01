@@ -28,3 +28,7 @@ class Files(db.Moddel):
 	date_used = db.Column(db.DateTime, nullable=False, default=datetime.now)
 
 	user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+
+	def __ref__(self):
+		return ''.join([
+			self.user_id,' ', self.file_name])
