@@ -171,29 +171,54 @@ class FilesForm(FlaskForm):
 
 
 
-# class CPersonalityForm(FlaskForm):
-#     pet_peeves
-#     hobbies
-#     alignment
-#     accent
-#     introvert_extrovert_scale
-#     passionate
-#     earlybird_nightowl
-#     favourite_meal
-#     goals
-#     pushover_controlfreak
-#     music_genre
-#     popularity
-#     cat_person
-#     dog_person
-#     romantic_relationship_ideals
-#     partial_birthday_celebration
-#     easy_appologiser
-#     bullied
-#     smarts
-#     country
-#     book_worm
-#     fears
+class CPersonalityForm(FlaskForm):
+    pet_peeves = StringField('What pet-peeves does your character have?')
+    hobbies = StringField('What hobbies does your character have?')
+    alignment = SelectField('What Alignement is your character?'
+        choices=[
+            ('lawful_good','Lawful Good'),
+            ('lawful_neutral','Lawful Neutral'),
+            ('lawful_evil','Lawful Evil'),
+            ('neutral_good','Neutral Good'),
+            ('true_neutral','True Neutral'),
+            ('neutral_evil','Neutral Evil'),
+            ('chaotic_good','Chaotic Good'),
+            ('chaotic_neutral','Chaotic Neutral'),
+            ('chaotic_evil','Chaotic Evil')
+        ])
+    accent = StringField('What accent does your character have?')
+    introvert_extrovert_scale #scale
+    passionate = StringField('What is your character passionate about?')
+    earlybird_nightowl = SelectField('Is your caracter an earlybird or a nightowl?'
+        choices=[
+            ('earlybird','Earlybird'),
+            ('nightowl','Nightowl')
+        ])
+    favourite_meal = StringField('Whats your characters favourite meal?')
+    goals = StringField('What does your character strive to achieve?')
+    pushover_controlfreak #scale
+    music_genre = StringField('What genre of music does your character generally listen to?')
+    popularity
+    cat_person = BooleanField('Cat Person') 
+    dog_person = BooleanField('Dog Person')
+    romantic_relationship_ideals = StringField('How does your character view relationships?')
+    partial_birthday_celebration = SelectField('Does your character like to celebrate their birthday?'
+        choices=[
+        ('yes','Yes'),
+        ('no','No')
+    ])
+    if partial_birthday_celebration == 'no':
+        birthday_why = StringField("Why doesn't your character like to celebrate their birthday?"
+            validation=[
+                DataRequired()
+            ])
+
+    easy_appologiser
+    bullied
+    smarts
+    country
+    book_worm
+    fears
 
 
 
