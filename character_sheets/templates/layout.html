@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Character Sheet Generator</title>
+	<title>{{ title }} - Page</title>
+</head>
+<body>
+	<div class='navbar'>
+		{% if current_user. is_authenticated %}
+			<a href='/'>Home</a>
+			<!-- add links here when decided!!!-->
+
+		{% else %}
+			<a href='/'>Home</a>
+			<!-- add links here when decided!!!-->
+
+		{% endif %}
+	</div>
+	{% block page_content %}{% end page_content %}
+</body>	
+</html>
