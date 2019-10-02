@@ -3,12 +3,12 @@
 	<h2>Registration Page</h2>
 	<p>Enter your details below to sign up with an account</p>
 	<div class="form">
-		<form> 
+		<form method='POST', action=""> 
 			{{ form.hidden_tag() }}
 			<div class="form-group">
 				{{ form.first_name.label }}
 				{{ form.first_name }}
-				{% if error in form.first.name.errors %}
+				{% if error in form.first_name.errors %}
 					<div class="error">
 						{% for error in form.first_name.errors %}
 							<span style='color:red'>{{ error }}</span>

@@ -1,4 +1,22 @@
 {% extends "layout.html" %}
+{% block navbar_content %}{% endblock navbar_content %}
 {% block page_content %}
-
+	<h2>Characters Appearance</h2>
+	<!--<div class="form">
+		<form method='POST', action="">
+			{% form.hidden_tags() %}
+			<div class="form-group">
+				{{ form.eye_colour.label }}
+				{{ form.eye_colour }}
+				{% if error in form.eye_colour.errors %}
+					<div class="error">
+						{% for error in form.eye_colour.errors %}
+							<span style='color:red'>{{ error }}</span>
+						{% endfor %}
+					</div>
+				{% endif %}
+			</div>
+		</form>
+	</div>-->
 {% endblock %}
+

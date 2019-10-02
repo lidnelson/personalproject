@@ -1,8 +1,8 @@
-from flask import render_template, redirect, ur_for, request
+from flask import render_template, redirect, url_for, request
 from flask_login import login_user, current_user, logout_user, login_required
-from character_sheets import app, db, bcrypt
-from character_sheets.model import Users, Files
-from character_sheets.form import CApperenceForm, CPersonalityForm, CMinorDetailsForm, CAbilitiesForm, RegistrationForm, LoginForm, UpdateAccountForm
+from structure import app, db, bcrypt
+from structure.model import Users, Files
+from structure.form import RegistrationForm, LoginForm, UpdateAccountForm, FilesForm, CApperenceForm#, CPersonalityForm, CMinorDetailsForm, CAbilitiesForm
 
 @app.route('/')
 @app.route('/home')
@@ -43,7 +43,7 @@ def register():
 			password=hashed_pw)
 		db.session.add(user)
 		db.session.commit()
-		return redirect(url_for('post'))
+		return redirect(url_for('account'))
 	return render_template('register.html', title = 'Register', form=form)
 
 @app.route("/logout")
@@ -72,27 +72,35 @@ def updateaccount():
 def account():
 	return render_template('account.html', title = 'Account')
 
-@app.route('/createfile', methods=['GET','POST'])
+@app.route('/account/createfile', methods=['GET','POST'])
 @login_required
 def createfile():
-	form = FileForm()
+	form = FilesForm()
 	if form.validate_on_submit():
-		fileData= File(
+		fileData = Files(
 			file_name=form.file_name.data,
-			author=current_user.first_name + current_user.last_name,
 			character_first_name=form.character_first_name.data,
-			character_last_name= form.character_last_name.data
-			
+			character_last_name= form.character_last_name.data,
+			author_file= current_user.first_name + " " + current_user.last_name,
+			user_id= current_user.id
 			)
 		db.session.add(fileData)
 		db.session.commit()
-		# return redirect(url_for(''))
+		return redirect(url_for('appearenceform'))
 	else:
 		print(form.errors)
 	return render_template('createfile.html', title= 'Create File', form=form)
 	
-
-CApperenceForm
-CPersonalityForm
-CMinorDetailsForm
-CAbilitiesForm
+@app.route('/account/character_appearence_form')
+@login_required
+def appearenceform():
+	form = CApperenceForm()
+	if form.validate_on_submit():
+		return redirect(url_for('home'))
+	# else:
+	# 	print(form.errors)
+	return render_template('characterapperenceform.html', title='File form pt.2')#, form=form)
+# CApperenceForm
+# CPersonalityForm
+# CMinorDetailsForm
+# CAbilitiesForm

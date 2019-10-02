@@ -1,9 +1,9 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField, BooleanField, SelectField, IntegerField
-from wtforms.validators import DataRequired, Length, Email, equalTo, ValidationError
+from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from flask_login import current_user
-from character_sheets import bcrypt
-from character_sheets.model import Users
+from structure import bcrypt
+from structure.model import Users
 
 
 class RegistrationForm(FlaskForm):
@@ -91,143 +91,220 @@ class UpdateAccountForm(FlaskForm):
 
 
 class FilesForm(FlaskForm):
-	file_name = StringField('File Name'
-		validators=[
-			DataRequired(),
-			Length(min=5)
-		])
-	character_first_name = StringField('Characters First Name'
+	file_name = StringField('File Name: ',
 		validators=[
 			DataRequired(),
 			Length(min=2)
 		])
-	character_last_name = StringField('Characters Last Name'
+	character_first_name = StringField('Characters First Name: ',
 		validators=[
-			DataRequired()
-			length(min=2)
+			DataRequired(),
+			Length(min=2)
+		])
+	character_last_name = StringField('Characters Last Name: ',
+		validators=[
+			DataRequired(),
+			Length(min=2)
 		])
 	submit = SubmitField('Create File')
 
 
-# class CApperenceForm(FlaskForm):
-#     eye_colour= SelectField('Characters Eye Colour'
-#             choices=[
-#                 ('blue','blue'),
-#                 ('black','black'),
-#                 ('green','green'),
-#                 ('brown','brown'),
-#                 ('purple','purple'),
-#                 ('magenta','magenta'),
-#                 ('red','red'),
-#                 ('grey','grey'),
-#                 ('syan','syan'),
-#                 ('teal','teal'),
-#                 ('turquoise','turquoise'),
-#                 ('dark bule','dark blue'),
-#                 ('yellow','yellow')
-#             ])
-#     eye_shape
-#     lip_colour
-#     lip_shape
-#     nose_size
-#     hair_colour
-#     hair_style
-#     hair_length
-#     scars = BooleanField('Tick here if your character has anty scars')
-#     if scars == True:
-#         scars_number = IntegerField('How many scars?'
-#                 validation=[
-#                     DataRequired()
-#                 ])
-#         for i in scars_number:
-#             scars_what=StringField('What does the scar look like?'
-#                     validation=[
-#                         DataRequired()
-#                     ])
-#             scars_where=StringField('Where on the body is the scar?'
-#                     validation=[
-#                         DataRequired()
-#                     ])
-#             scars_why=StringField("What's the story behind the scar"
-#                     validation=[
-#                         DataRequired()
-#                     ])
-#     tattoos = BooleanField('Tick if your charcter has tattoos?')
-#     if tattoos == True:
-#         tattoos_number = IntegerField('How many tattoos does your character have?'
-#                 validation=[
-#                     DataRequired()
-#                 ])
-#         for i in tattoos_number:
-#             tattoos_what = StringField('What is the tattoo?'
-#                     validation=[
-#                         DataRequired()
-#                     ])
-#             tattoos_where = StringField('Where is the tattoo on the body?'
-#                     validation=[
-#                         DataRequired()
-#                     ])
-#     Accessories
-
-
-
-class CPersonalityForm(FlaskForm):
-    pet_peeves = StringField('What pet-peeves does your character have?')
-    hobbies = StringField('What hobbies does your character have?')
-    alignment = SelectField('What Alignement is your character?'
-        choices=[
-            ('lawful_good','Lawful Good'),
-            ('lawful_neutral','Lawful Neutral'),
-            ('lawful_evil','Lawful Evil'),
-            ('neutral_good','Neutral Good'),
-            ('true_neutral','True Neutral'),
-            ('neutral_evil','Neutral Evil'),
-            ('chaotic_good','Chaotic Good'),
-            ('chaotic_neutral','Chaotic Neutral'),
-            ('chaotic_evil','Chaotic Evil')
-        ])
-    accent = StringField('What accent does your character have?')
-    introvert_extrovert_scale #scale
-    passionate = StringField('What is your character passionate about?')
-    earlybird_nightowl = SelectField('Is your caracter an earlybird or a nightowl?'
-        choices=[
-            ('earlybird','Earlybird'),
-            ('nightowl','Nightowl')
-        ])
-    favourite_meal = StringField('Whats your characters favourite meal?')
-    goals = StringField('What does your character strive to achieve?')
-    pushover_controlfreak #scale
-    music_genre = StringField('What genre of music does your character generally listen to?')
-    popularity
-    cat_person = BooleanField('Cat Person') 
-    dog_person = BooleanField('Dog Person')
-    romantic_relationship_ideals = StringField('How does your character view relationships?')
-    partial_birthday_celebration = SelectField('Does your character like to celebrate their birthday?'
-        choices=[
-        ('yes','Yes'),
-        ('no','No')
-    ])
-    if partial_birthday_celebration == 'no':
-        birthday_why = StringField("Why doesn't your character like to celebrate their birthday?"
-            validation=[
-                DataRequired()
+class CApperenceForm(FlaskForm):
+    eye_colour= SelectField('Characters Eye Colour',
+            choices=[
+                ('blue','blue'),
+                ('black','black'),
+                ('green','green'),
+                ('brown','brown'),
+                ('purple','purple'),
+                ('magenta','magenta'),
+                ('red','red'),
+                ('grey','grey'),
+                ('syan','syan'),
+                ('teal','teal'),
+                ('turquoise','turquoise'),
+                ('dark bule','dark blue'),
+                ('yellow','yellow')
             ])
+    #eye_shape
+    #lip_colour
+    #lip_shape
+    #nose_size
+    #hair_colour
+    #hair_style
+    #hair_length
+    scars = BooleanField('Tick here if your character has anty scars')
+    if scars == True:
+        scars_number = IntegerField('How many scars?',
+                validation=[
+                    DataRequired()
+                ])
+        for i in scars_number:
+            scars_what=StringField('What does the scar look like?',
+                    validation=[
+                        DataRequired()
+                    ])
+            scars_where=StringField('Where on the body is the scar?',
+                    validation=[
+                        DataRequired()
+                    ])
+            scars_why=StringField("What's the story behind the scar",
+                    validation=[
+                        DataRequired()
+                    ])
+    tattoos = BooleanField('Tick if your charcter has tattoos?')
+    if tattoos == True:
+        tattoos_number = IntegerField('How many tattoos does your character have?',
+                validation=[
+                    DataRequired()
+                ])
+        for i in tattoos_number:
+            tattoos_what = StringField('What is the tattoo?',
+                    validation=[
+                        DataRequired()
+                    ])
+            tattoos_where = StringField('Where is the tattoo on the body?',
+                    validation=[
+                        DataRequired()
+                    ])
+    #Accessories
 
-    easy_appologiser
-    bullied
-    smarts
-    country
-    book_worm
-    fears
+
+
+# class CPersonalityForm(FlaskForm):
+#     pet_peeves = StringField('What pet-peeves does your character have?')
+#     hobbies = StringField('What hobbies does your character have?')
+#     alignment = SelectField('What Alignement is your character?'
+#         choices=[
+#             ('lawful_good','Lawful Good'),
+#             ('lawful_neutral','Lawful Neutral'),
+#             ('lawful_evil','Lawful Evil'),
+#             ('neutral_good','Neutral Good'),
+#             ('true_neutral','True Neutral'),
+#             ('neutral_evil','Neutral Evil'),
+#             ('chaotic_good','Chaotic Good'),
+#             ('chaotic_neutral','Chaotic Neutral'),
+#             ('chaotic_evil','Chaotic Evil')
+#         ])
+#     accent = StringField('What accent does your character have?')
+#     introvert_extrovert_scale #scale
+#     passionate = StringField('What is your character passionate about?')
+#     earlybird_nightowl = SelectField('Is your caracter an earlybird or a nightowl?'
+#         choices=[
+#             ('earlybird','Earlybird'),
+#             ('nightowl','Nightowl')
+#         ])
+#     favourite_meal = StringField('Whats your characters favourite meal?')
+#     goals = StringField('What does your character strive to achieve?')
+#     pushover_controlfreak #scale
+#     music_genre = StringField('What genre of music does your character generally listen to?')
+#     popularity
+#     cat_person = BooleanField('Cat Person') 
+#     dog_person = BooleanField('Dog Person')
+#     romantic_relationship_ideals = StringField('How does your character view relationships?')
+#     partial_birthday_celebration = SelectField('Does your character like to celebrate their birthday?'
+#         choices=[
+#         ('yes','Yes'),
+#         ('no','No')
+#     ])
+#     if partial_birthday_celebration == 'no':
+#         birthday_why = StringField("Why doesn't your character like to celebrate their birthday?"
+#             validator=[
+#                 DataRequired()
+#             ])
+#     easy_appologiser = SelectField('Does your character find it easy to applogise?'
+#         choices=[
+#             ('yes','Yes'),
+#             ('no','No')
+#         ])
+#     bullied = SelectField('Was/is your character bullied at school?'
+#         choices=[
+#             ('yes','Yes'),
+#             ('no','No')
+#         ]) 
+#     if bullied=='yes':
+#         bullied_stopped = SelectField('Has the bullying stopped?'
+#         choices=[
+#             ('yes','Yes'),
+#             ('no','No')
+#         ])
+#         if bullied_stopped=='yes':
+#             bully_effect = StringField('How does it affect your character and the way they act?')
+#     smarts = SelectField('Is your character have street smart or book smart?'
+#         choices=[
+#             ('street_smart','Street Smart'),
+#             ('book_smart','Book Smart')
+#         ])
+#     country = StringField('What country is your character from?')
+#     book_worm= BooleanField('Book worm')
+#     fears = StringField('What is your character greatest fear?')
 
 
 
 # class CMinorDetailsForm(FlaskForm):
-#     address
-#     birthday
-#     health_issues
-#     mother
-#     father
+#     address = BooleanField ('Tick if you want to write your characters address')
+#     if address == True:
+#         address_1 = StringField('Address Line 1: ')
+#         address_2 = StringField('Address Line 2: ')
+#         town = StringField('Town: ')
+#         county_state =StringField('County/State: ')
+#         country= StringField('Country: ')
+#         postcode_zipcode = StringField('Post Code/Zip Code:')
+#     gender = = SelectField('what is their gender?'
+#                 choices=[
+#                     ('male','Male'),
+#                     ('female','Female'),
+#                     ('gender_fluid','Gender Fluid')
+#     birthday = StringField('Characters Birthday: ')
+#     health_issues = StringField('Does your character have any health issues?')
+#     mother = SelectField('Does your character know their biological mother?'
+#         choices=[
+#                 ('yes','Yes'),
+#                 ('No','No')
+#             ])
+#     if mother == 'yes':
+#         mother_first_name = StringField('Whats the mothers first name?'
+#                 validation=[
+#                     DataRequired()
+#                 ])
+#         mother_last_name = StringField('Whats the mothers last name?'
+#                 validation=[
+#                     DataRequired()
+#                 ])
+#         mother_age = IntegerField('How old is their mother?'
+#                 validation=[
+#                     DataRequired()
+#                 ])
+#         mother_gender = SelectField('what is the gender of their mother?'
+#                 choices=[
+#                     ('male','Male'),
+#                     ('female','Female'),
+#                     ('gender_fluid','Gender Fluid')
+#                 ])
+#     father= SelectField('Does your character know their biological father?'
+#         choices=[
+#                 ('yes','Yes'),
+#                 ('No','No')
+#             ])
+#     if father == 'yes':
+#         father_first_name = StringField('Whats the fathers first name?'
+#                 validation=[
+#                     DataRequired()
+#                 ])
+#         father_last_name = StringField('Whats the fathers last name?'
+#                 validation=[
+#                     DataRequired()
+#                 ])
+#         father_age = IntegerField('How old is their father'
+#                 validation=[
+#                     DataRequired()
+#                 ])
+#         father_gender = SelectField('what is the gender of their father?'
+#                 choices=[
+#                     ('male','Male'),
+#                     ('female','Female'),
+#                     ('gender_fluid','Gender Fluid')
+#                 ])
 #     relationships = SelectField('Are there any other types of relationships?'
 #             choices=[
 #                 ('yes','Yes'),
@@ -273,8 +350,10 @@ class CPersonalityForm(FlaskForm):
 #                     DataRequired()
 #                 ])
 #         r_gender = SelectField('what is the gender of the person?'
-#                 validation=[
-#                     DataRequired()
+#                 choices=[
+#                     ('male','Male'),
+#                     ('female','Female'),
+#                     ('gender_fluid','Gender Fluid')
 #                 ])
 
 # class CAbilitiesForm(FlaskForm):
@@ -318,5 +397,5 @@ class CPersonalityForm(FlaskForm):
 #                     validation=[
 #                         DataRequired()
 #                     ])
-#     improvements
+#     improvements = StringField('What skills does your character need to improve on?')
 

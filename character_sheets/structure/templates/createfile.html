@@ -1,4 +1,45 @@
 {% extends "layout.html" %}
 {% block page_content %}
-
+	<h2>Create a character sheet</h2>
+	<div class="form">
+		<form method='POST', action="">
+			{{ form.hidden_tag() }}
+			<div class="form-group">
+				{{ form.file_name.label }}
+				{{ form.file_name }}
+				{% if error in form.file_name.errors %}
+					<div class="error">
+						{% for error in form.file_name.errors %}
+							<span style='color:red'>{{ error }}</span>
+						{% endfor %}
+					</div>
+				{% endif %}
+			</div><br>
+			<div class="form-group">
+				{{ form.character_first_name.label }}
+				{{ form.character_first_name }}
+				{% if error in form.character_first_name.errors %}
+					<div class="error">
+						{% for error in form.character_first_name.errors %}
+							<span style='color:red'>{{ error }}</span>
+						{% endfor %}
+					</div>
+				{% endif %}
+			</div><br>
+			<div class="form-group">
+				{{ form.character_last_name.label }}
+				{{ form.character_last_name }}
+				{% if error in form.character_last_name.errors %}
+					<div class="error">
+						{% for error in form.character_last_name.errors %}
+							<span style='color:red'>{{ error }}</span>
+						{% endfor %}
+					</div>
+				{% endif %}
+			</div><br>
+			<div class="form-group">
+				{{ form.submit }}
+			</div>
+		</form>
+	</div>
 {% endblock %}

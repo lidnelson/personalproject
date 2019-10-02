@@ -5,17 +5,27 @@
 	<title>{{ title }} - Page</title>
 </head>
 <body>
+	{% block navbar_content %}{% endblock navbar_content %}
+	
 	<div class='navbar'>
 		{% if current_user. is_authenticated %}
 			<a href='/'>Home</a>
-			<!-- add links here when decided!!!-->
+			<a href='/account'>Account</a>
+			<a href='/about'>About Us</a>
+			<a href='/account/createfile'>Create Character Sheet</a>
 
 		{% else %}
 			<a href='/'>Home</a>
+			<p><a href='/login'>Login</a></p>
+			<p><a href='/about'>About us</a></p>
+			<p><a href='/register'>Register</a></p>
 			<!-- add links here when decided!!!-->
 
 		{% endif %}
 	</div>
-	{% block page_content %}{% end page_content %}
+	<div align="center">
+		<h1>Character Sheet Generator</h1>
+	</div>
+	{% block page_content %}{% endblock page_content %}
 </body>	
 </html>
