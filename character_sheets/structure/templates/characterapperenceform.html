@@ -2,7 +2,7 @@
 {% block navbar_content %}{% endblock navbar_content %}
 {% block page_content %}
 	<h2>Characters Appearance</h2>
-	<!--<div class="form">
+	<div class="form">
 		<form method='POST', action="">
 			{% form.hidden_tags() %}
 			<div class="form-group">
@@ -15,8 +15,44 @@
 						{% endfor %}
 					</div>
 				{% endif %}
+			</div><br>
+			<div class="form-group">
+				{{ form.scars.label }}
+				{{ form.scars }}
+			</div><br>
+			<div class="form-group">
+				{{ form.scars_number.label }}
+				{{ form.scars_number }}
+			</div><br>
+			<div class="form-group">
+				{{ form.scars_what.label }}
+				{{ form.scars_what }}
+			</div><br>
+			<div class="form-group">
+				{{ form.scars_where.label }}
+				{{ form.scars_where }}
+			</div><br>
+			<div class="form-group">
+				{{ form.scars_why.label }}
+				{{ form.scars_why }}
+			</div><br>
+			<div class="form-group">
+				{{ form.tattoos.label }}
+				{{ form.tattoos }}
+			</div><br>
+			<div class="form-group">
+				{{ form.tattoos_number.label }}
+				{{ form.tattoos_number }}
+			</div><br>
+			<div class="form-group">
+				{{ form.tattoos_what.label }}
+				{{ form.tattoos_what }}
+			</div><br>
+			<div class="form-group">
+				{{ form.tattoos_where.label }}
+				{{ form.tattoos_where }}
 			</div>
 		</form>
-	</div>-->
+	</div>
 {% endblock %}
 
