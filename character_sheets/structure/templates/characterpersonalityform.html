@@ -1,4 +1,98 @@
 {% extends "layout.html" %}
 {% block page_content %}
-
+<h2>Characters Personality</h2>
+<div class="form">
+  <form method='POST', action="">
+    {% form.hidden_tags() %}
+    <div class="form-group">
+      {{ form.pet_peeves.label }}
+      {{ form.pet_peeves }}
+    </div><br>
+    <div class="form-group">
+      {{ form.hobbies.label }}
+      {{ form.hobbies }}
+    </div><br>
+    <div class="form-group">
+      <!-- give an expliation to each alignment -->
+      {{ form.alignment.label }}
+      {{ form.alignment }}
+    </div><br>
+    <div class="form-group">
+      {{ form.accent.label }}
+      {{ form.accent }}
+    </div><br>
+    <div class="form-group">
+      {{ form.passionate.label }}
+      {{ form.passionate }}
+    </div><br>
+    <div class="form-group">
+      {{ form.earlybird_nightowl.label }}
+      {{ form.earlybird_nightowl }}
+    </div><br>
+    <div class="form-group">
+      {{ form.favourite_meal.label }}
+      {{ form.favourite_meal }}
+    </div><br>
+    <div class="form-group">
+      {{ form.goals.label }}
+      {{ form.goals }}
+    </div><br>
+    <div class="form-group">
+      {{ form.pushover_controlfreak.label }}
+      {{ form.pushover_controlfreak }}
+    </div><br>
+    <div class="form-group">
+      {{ form.music_genre.label }}
+      {{ form.music_genre }}
+    </div><br>
+    <div class="form-group">
+      {{ form.cat_person.label }}
+      {{ form.cat_person }}
+    </div><br>
+    <div class="form-group">
+      {{ form.dog_person.label }}
+      {{ form.dog_person }}
+    </div><br>
+    <div class="form-group">
+      {{ form.romantic_relationship_ideals.label }}
+      {{ form.romantic_relationship_ideals }}
+    </div><br>
+    <div class="form-group">
+      {{ form.partial_birthday_celebration.label }}
+      {{ form.partial_birthday_celebration }}
+    </div><br>
+    <div class="form-group">
+      {{ form.birthday_why.label }}
+      {{ form.birthday_why }}
+    </div><br>
+    <div class="form-group">
+      {{ form.easy_appologiser.label }}
+      {{ form.easy_appologiser }}      
+    </div><br>
+    <div class="form-group">
+      {{ form.bullied.label }}
+      {{ form.bullied }}
+    </div><br>
+    <div class="form-group">
+      {{ form.bullied_stopped.label }}
+      {{ form.bullied_stopped }}
+    </div><br>
+    <div class="form-group">
+      {{ form.smarts.label }}
+      {{ form.smarts }}
+    </div><br>
+    <div class="form-group">
+      {{ form.country.label }}
+      {{ form.country }}
+    </div><br>
+    <div class="form-group">
+      {{ form.book_worm.label }}
+      {{ form.book_worm }}
+    </div><br>
+    <div class="form-group">
+      {{ form.fears.label }}
+      {{ form.fears }}
+    </div><br>
+  </form>
+</div>  
 {% endblock %}
