@@ -7,8 +7,17 @@
 	</div>
 </div>
 {% endblock navbar_content %}
-
 {% block page_content %}
-
-
+<p align="center">Hello {{ current_user.first_name }} {{ current_user.last_name }}</p>
+{% for file in file %}
+	<div>
+		<h4>File: {{ file.file_name }}</h4>
+		<p>Character: {{ file.character_first_name }} {{ file.character_last_name }}</p>
+		<p>Creator: {{ file.author_file }}</p>
+		<p>last updated: {{ file.date_used }}</p>
+		<span align="right"><a>Delete</a></span>
+		<span align="right"><a>Edit</a></span>
+		<span align="right"><a href='/account/file/'>Characters Page</a></span>
+	</div>
+{% endfor %} 
 {% endblock %}

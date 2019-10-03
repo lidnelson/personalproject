@@ -1,4 +1,40 @@
 {% extends "layout.html" %}
 {% block page_content %}
-
+<h2>Characters Details</h2>
+<div class="form">
+	<form method='POST', action="">
+		{{ form.hidden_tag() }}
+		<div class="form-group">
+			{{ form.address.label }}
+			{{ form.address }}
+		</div><br>
+		<div class="form-group">
+			{{ form.gender.label }}
+			{{ form.gender }}
+		</div><br>
+		<div class="form-group">
+			{{ form.birthday.label }}
+			{{ form.birthday }}
+		</div><br>
+		<div class="form-group">
+			{{ form.health_issues.label }}
+			{{ form.health_issues }}
+		</div><br>
+		<div class="form-group">
+			{{ form.mother.label }}
+			{{ form.mother }}
+		</div><br>
+		<div class="form-group">
+			{{ form.father.label }}
+			{{ form.father }}
+		</div><br>
+		<div class="form-group">
+			{{ form.relationships.label }}
+			{{ form.relationship }}
+		</div><br>
+		<div class="form-group">
+			{{ form.submit }}
+		</div>
+	</form>
+</div>
 {% endblock %}

@@ -1,8 +1,8 @@
 from flask import render_template, redirect, url_for, request
 from flask_login import login_user, current_user, logout_user, login_required
-from structure import app, db, bcrypt
+from structure import app, db, bcrypt, login_manager, LoginManager
 from structure.model import Users, Files
-from structure.form import RegistrationForm, LoginForm, UpdateAccountForm, FilesForm, CApperenceForm#, CPersonalityForm, CMinorDetailsForm, CAbilitiesForm
+from structure.form import RegistrationForm, LoginForm, UpdateAccountForm, FilesForm, CApperenceForm, CPersonalityForm, CMinorDetailsForm, CAbilitiesForm
 
 @app.route('/')
 @app.route('/home')
@@ -70,7 +70,8 @@ def updateaccount():
 @app.route('/account')
 @login_required
 def account():
-	return render_template('account.html', title = 'Account')
+	fileData=Files.query.filter_by(user_id=current_user.id)
+	return render_template('account.html', title = 'Account', file=fileData)
 
 @app.route('/account/createfile', methods=['GET','POST'])
 @login_required
@@ -89,17 +90,54 @@ def createfile():
 		return redirect(url_for('appearenceform'))
 	else:
 		print(form.errors)
-	return render_template('createfile.html', title= 'Create File', form=form)
+	return render_template('createfile.html', title= 'Create File', form=form, file=fileData)
 	
 @app.route('/account/character_appearence_form')
 @login_required
 def appearenceform():
 	form = CApperenceForm()
 	if form.validate_on_submit():
-		return redirect(url_for('home'))
+		return redirect(url_for('personalityform'))
 	# else:
-	# 	print(form.errors)
-	return render_template('characterapperenceform.html', title='File form pt.2')#, form=form)
+	#  	print(form.errors)
+	return render_template('characterapperenceform.html', title='File form pt.2', form=form)
+
+@app.route('/account/character_personality_form')
+@login_required
+def personalityform():
+	form=CPersonalityForm()
+	if form.validate_on_submit():
+		return redirect(url_for('detailsform'))
+	return render_template('characterpersonalityform.html', title="File form pt.3", form=form)
+
+
+@app.route('/account/character_details_form')
+@login_required
+def detailsform():
+	form=CMinorDetailsForm()
+	if form.validate_on_submit():
+		return redirect(url_for('abilitiesform'))
+	return render_template('characterminordetailsform.html', title="File form pt.3", form=form)
+
+@app.route('/account/character_abilities_form')
+@login_required
+def abilitiesform():
+	form=CAbilitiesForm()
+	if form.validate_on_submit():
+		return redirect(url_for('account'))
+	return render_template('characterabilitiesform.html', title='File from pt.4', form=form)
+
+@app.route('/account/file/<int(min=1):file_id>')
+@login_required
+def characterpage(file_id):
+	fileData = Files.query.filter_by(id=file_id)
+	form1 = FilesForm()
+	form2 = CApperenceForm()
+	form3 = CPersonalityForm()
+	form4 = CMinorDetailsForm()
+	form5 = CAbilitiesForm()
+	return render_template('characterpage.html', title="Charater page", form1=form1, form2=form2, form3=form3, form4=form4,form5=form5, file=fileData)
+
 # CApperenceForm
 # CPersonalityForm
 # CMinorDetailsForm
