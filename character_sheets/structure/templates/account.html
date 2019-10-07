@@ -1,23 +1,30 @@
 {% extends "layout.html" %}
+{% block greeting %}
+<p align="center">Hello {{ current_user.first_name }} {{ current_user.last_name }}</p>
+{% endblock greeting %}
 {% block navbar_content %}
 <div>
 	<div class="accountnavbar">
+		<p>Account Links:</p>
+		<a href='/update_account'>Update Account Details</a>
+		<a href='/account/delete'>Delete Account</a>
 		<a href='/logout',style=>Logout</a>
-		<a href='/update_account'> Update Account Details</a></
 	</div>
 </div>
 {% endblock navbar_content %}
 {% block page_content %}
-<p align="center">Hello {{ current_user.first_name }} {{ current_user.last_name }}</p>
+<h2 align="center" style='text-decoration: underline'>Your Files</h2>
 {% for file in file %}
 	<div>
 		<h4>File: {{ file.file_name }}</h4>
 		<p>Character: {{ file.character_first_name }} {{ file.character_last_name }}</p>
 		<p>Creator: {{ file.author_file }}</p>
-		<p>last updated: {{ file.date_used }}</p>
-		<span align="right"><a>Delete</a></span>
-		<span align="right"><a>Edit</a></span>
-		<span align="right"><a href='/account/file/'>Characters Page</a></span>
+		<p>Last Updated: {{ file.date_used }}</p>
+		<div align="right">	
+			<span><a href='/account/file/{{ file.id }}/delete'>Delete</a></span>
+			<span><a>Edit</a></span>
+			<span><a href='/account/file/{{ file.id }}'>Characters Page</a></span>
+		</div>
 	</div>
 {% endfor %} 
 {% endblock %}

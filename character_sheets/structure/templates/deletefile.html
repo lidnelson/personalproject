@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+{% block page_content %}
+<div>
+	<p style='color:red', align="center">Are you sure you want to delete this file?</p>
+</div>
+<div class="form">
+	<form method='POST', activity="">
+		{{ form.hidden_tag() }}
+		<div class="form-group", align="center">
+			{{ form.yes }}
+			<span><a href="{{ url_for('account') }}"><input type="button" value="No"></a></span>
+		</div>
+	</form>
+</div>
+</div>
+{% endblock %}

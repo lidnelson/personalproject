@@ -2,7 +2,7 @@ from flask import render_template, redirect, url_for, request
 from flask_login import login_user, current_user, logout_user, login_required
 from structure import app, db, bcrypt, login_manager, LoginManager
 from structure.model import Users, Files
-from structure.form import RegistrationForm, LoginForm, UpdateAccountForm, FilesForm, CApperenceForm, CPersonalityForm, CMinorDetailsForm, CAbilitiesForm
+from structure.form import RegistrationForm, LoginForm, UpdateAccountForm, FilesForm, CApperenceForm, CPersonalityForm, CMinorDetailsForm, CAbilitiesForm, DeleteForm
 
 @app.route('/')
 @app.route('/home')
@@ -87,10 +87,12 @@ def createfile():
 			)
 		db.session.add(fileData)
 		db.session.commit()
+
 		return redirect(url_for('appearenceform'))
 	else:
 		print(form.errors)
-	return render_template('createfile.html', title= 'Create File', form=form, file=fileData)
+	return render_template('createfile.html', title= 'Create File', form=form)
+
 	
 @app.route('/account/character_appearence_form')
 @login_required
@@ -138,6 +140,45 @@ def characterpage(file_id):
 	form5 = CAbilitiesForm()
 	return render_template('characterpage.html', title="Charater page", form1=form1, form2=form2, form3=form3, form4=form4,form5=form5, file=fileData)
 
+@app.route('/account/delete', methods=['GET','POST'])
+@login_required
+def deleteaccount():
+	form = DeleteForm()
+	if form.validate_on_submit():
+		files =Files.query.filter_by(user_id=current_user.id).all()
+		for i in files:
+			db.session.delete(i)
+		db.session.delete(current_user)
+		db.session.commit()
+		logout_user()
+		return redirect(url_for('home'))
+	return render_template('deleteaccount.html',title='Delete Account Page', form=form)
+ 
+	
+
+@app.route('/account/file/<int(min=1):file_id>/delete', methods=['GET','POST'])
+@login_required
+def deletecharacter(file_id):
+	form= DeleteForm()
+	print(file_id)
+	if form.yes.data:
+		fileData= Files.query.filter_by(id=file_id).first()
+		print(fileData)
+		db.session.delete(fileData)
+		db.session.commit()
+		return redirect(url_for('account'))	
+	return render_template('deletefile.html',title='Delete File Page', form=form)
+
+@app.route('/account/file/<int(min=1):file_id>/edit')
+@login_required
+def edit(file_id):
+	fileData=Files.query.filter_by(id=file_id)
+	return render_template('editfile.html',title='Edit file page')
+
+
+@login_manager.user_loader
+def load_user(id):
+	return Users.query.get(int(id))
 # CApperenceForm
 # CPersonalityForm
 # CMinorDetailsForm

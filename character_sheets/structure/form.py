@@ -106,6 +106,11 @@ class FilesForm(FlaskForm):
 			DataRequired(),
 			Length(min=2)
 		])
+    #project = StringField('What porject is this for: ')
+    #character_description = StringField('Short description of character: ',
+        # validators=[
+        #     Length(min=2, max=10000)])
+
 	submit = SubmitField('Create File')
 
 
@@ -222,7 +227,7 @@ class CPersonalityForm(FlaskForm):
     accent = StringField('What accent does your character have?')
     #introvert_extrovert_scale #scale
     passionate = StringField('What is your character passionate about?')
-    earlybird_nightowl = SelectField('Is your caracter an earlybird or a nightowl?',
+    earlybird_nightowl = SelectField('Is your character an earlybird or a nightowl?',
         choices=[
             ('earlybird','Earlybird'),
             ('nightowl','Nightowl')
@@ -384,7 +389,9 @@ class CMinorDetailsForm(FlaskForm):
     #             validators=[
     #                 DataRequired()
     #             ])
-    #     r_gender = SelectField('what is the gender of the person?',
+    #     r_gender = SelectField('what is the gender of the person?',class deleteform(FlaskForm):
+    yes = SubmitField('Yes')
+    
     #             choices=[
     #                 ('male','Male'),
     #                 ('female','Female'),
@@ -437,6 +444,9 @@ class CAbilitiesForm(FlaskForm):
     improvements = StringField('What skills does your character need to improve on?')
     submit = SubmitField('Next page')
 
+class DeleteForm(FlaskForm):
+    yes = SubmitField('Yes')
+    
 
 @login_manager.user_loader
 def load_user(id):
