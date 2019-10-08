@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, request
 from flask_login import login_user, current_user, logout_user, login_required
 from structure import app, db, bcrypt, login_manager, LoginManager
-from structure.model import Users, Files
+from structure.model import Users, Files, CharacterFile 
 from structure.form import RegistrationForm, LoginForm, UpdateAccountForm, FilesForm, CApperenceForm, CPersonalityForm, CMinorDetailsForm, CAbilitiesForm, DeleteForm
 
 @app.route('/')
@@ -80,14 +80,15 @@ def createfile():
 	if form.validate_on_submit():
 		fileData = Files(
 			file_name=form.file_name.data,
+			project = form.project.data,
 			character_first_name=form.character_first_name.data,
 			character_last_name= form.character_last_name.data,
+			character_description = form.character_description.data,
 			author_file= current_user.first_name + " " + current_user.last_name,
 			user_id= current_user.id
 			)
 		db.session.add(fileData)
 		db.session.commit()
-
 		return redirect(url_for('appearenceform'))
 	else:
 		print(form.errors)
@@ -99,9 +100,18 @@ def createfile():
 def appearenceform():
 	form = CApperenceForm()
 	if form.validate_on_submit():
+		print('Hola padro')
+		charaData = CharacterFile (
+			file_id = 1,
+			eye_colour = form.eye_colour.data,
+			scars = form.scars.data,
+			tattoos = form.tattoos.data
+			)
+		db.session.add(charaData)
+		db.session.commit()
 		return redirect(url_for('personalityform'))
-	# else:
-	#  	print(form.errors)
+	else:
+		print(form.errors)
 	return render_template('characterapperenceform.html', title='File form pt.2', form=form)
 
 @app.route('/account/character_personality_form')
@@ -109,6 +119,29 @@ def appearenceform():
 def personalityform():
 	form=CPersonalityForm()
 	if form.validate_on_submit():
+		charaData = CharacterFile(
+			pet_peeves = form.pet_peeves.data,
+			hobbies = form.hobbies.data,
+			alignment = form.alignment.data,
+			accent = form.accent.data,
+			passionate = form.passionate.data,
+			earlybird_nightowl = form.earlybird_nightowl.data,
+			favourite_meal = form.favourite_meal.data,
+			goals = form.goals.data,
+			music_genre = form.music_genre.data,
+			cat_person = form.cat_person.data,
+			dog_person = form.dog_person,
+			romantic_relationship_ideals = form.romantic_relationship_ideals.data,
+			partial_birthday_celebration = form.partial_birthday_celebration.data,
+			easy_appologiser = form.easy_appologiser.data,
+			bullied = form.bullied.data,
+			smarts = form.smarts.data,
+			country = form.country.data,
+			book_worm = form.book_worm.data,
+			fears = form.fears.data
+			)
+		db.session.add(charaData)
+		db.session.commit()
 		return redirect(url_for('detailsform'))
 	return render_template('characterpersonalityform.html', title="File form pt.3", form=form)
 
@@ -118,6 +151,17 @@ def personalityform():
 def detailsform():
 	form=CMinorDetailsForm()
 	if form.validate_on_submit():
+		charaData= CharacterFile(
+			address = form.address.data,
+			gender = form.gender.data,
+			birthday = form.birthday.data,
+			health_issues = form.health_issues.data,
+			mother = form.mother.data,
+			father = form.father.data,
+			relationships = form.relationships.data
+			)
+		db.session.add(charaData)
+		db.session.commit()
 		return redirect(url_for('abilitiesform'))
 	return render_template('characterminordetailsform.html', title="File form pt.3", form=form)
 
@@ -125,7 +169,14 @@ def detailsform():
 @login_required
 def abilitiesform():
 	form=CAbilitiesForm()
-	if form.validate_on_submit():
+	if form4.validate_on_submit():
+		charaData = CharacterFile(
+			skills_number = form.skills_number.data,
+			magical_abilities = form.magical_abilities.data,
+			improvements = form.improvements.data
+			)
+		db.session.add(charaData)
+		db.session.commit()
 		return redirect(url_for('account'))
 	return render_template('characterabilitiesform.html', title='File from pt.4', form=form)
 

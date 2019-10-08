@@ -91,27 +91,31 @@ class UpdateAccountForm(FlaskForm):
 
 
 class FilesForm(FlaskForm):
-	file_name = StringField('File Name: ',
+    file_name = StringField('File Name: ',
 		validators=[
 			DataRequired(),
 			Length(min=2)
 		])
-	character_first_name = StringField('Characters First Name: ',
+    project = StringField('For which project: ',
+        validators=[
+            DataRequired(),
+            Length(min=5, max=100)
+        ])
+    character_first_name = StringField('Characters First Name: ',
 		validators=[
 			DataRequired(),
 			Length(min=2)
 		])
-	character_last_name = StringField('Characters Last Name: ',
+    character_last_name = StringField('Characters Last Name: ',
 		validators=[
 			DataRequired(),
 			Length(min=2)
 		])
-    #project = StringField('What porject is this for: ')
-    #character_description = StringField('Short description of character: ',
-        # validators=[
-        #     Length(min=2, max=10000)])
-
-	submit = SubmitField('Create File')
+    character_description = StringField('Short description of character: ',
+        validators=[
+            Length(min=2, max=10000)
+        ])
+    submit = SubmitField('Create File')
 
 
 class CApperenceForm(FlaskForm):
