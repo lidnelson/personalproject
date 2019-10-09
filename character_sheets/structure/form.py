@@ -118,7 +118,7 @@ class FilesForm(FlaskForm):
     submit = SubmitField('Create File')
 
 
-class CApperenceForm(FlaskForm):
+class CharacterForm(FlaskForm):
     eye_colour= SelectField('Characters Eye Colour',
             choices=[
             	('other', 'Other'),
@@ -174,9 +174,6 @@ class CApperenceForm(FlaskForm):
 	        validators=[
                 DataRequired()
             ])
-    submit = SubmitField('Next page')
-    
-
     # if scars == True:
     #     scars_number = IntegerField('How many scars?',
     #             validation=[
@@ -210,10 +207,6 @@ class CApperenceForm(FlaskForm):
     #                 DataRequired()
     #             ])
     #Accessories
-
-
-
-class CPersonalityForm(FlaskForm):
     pet_peeves = StringField('What pet-peeves does your character have?')
     hobbies = StringField('What hobbies does your character have?')
     alignment = SelectField('What Alignement is your character?',
@@ -280,11 +273,6 @@ class CPersonalityForm(FlaskForm):
     country = StringField('What country is your character from?')
     book_worm= BooleanField('Book worm')
     fears = StringField('What is your character greatest fear?')
-    submit = SubmitField('Next page')
-
-
-
-class CMinorDetailsForm(FlaskForm):
     address = BooleanField ('Tick if you want to write your characters address')
     # if address == True:
     #     address_1 = StringField('Address Line 1: ')
@@ -401,10 +389,6 @@ class CMinorDetailsForm(FlaskForm):
     #                 ('female','Female'),
     #                 ('gender_fluid','Gender Fluid')
     #             ])
-    submit = SubmitField('Next page')
-
-
-class CAbilitiesForm(FlaskForm):
     skills_number = IntegerField('How many skills does your character have?',
             validators=[
                 DataRequired()
@@ -446,7 +430,7 @@ class CAbilitiesForm(FlaskForm):
     #                     DataRequired()
     #                 ])
     improvements = StringField('What skills does your character need to improve on?')
-    submit = SubmitField('Next page')
+    submit = SubmitField('Submit')
 
 class DeleteForm(FlaskForm):
     yes = SubmitField('Yes')
