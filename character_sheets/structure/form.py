@@ -174,38 +174,6 @@ class CharacterForm(FlaskForm):
 	        validators=[
                 DataRequired()
             ])
-    # if scars == True:
-    #     scars_number = IntegerField('How many scars?',
-    #             validation=[
-    #                 DataRequired()
-    #             ])
-    #     for i in scars_number:
-    #         scars_what=StringField('What does the scar look like?',
-    #                 validation=[
-    #                     DataRequired()
-    #                 ])
-    #         scars_where=StringField('Where on the body is the scar?',
-    #                 validation=[
-    #                     DataRequired()
-    #                 ])
-    #         scars_why=StringField("What's the story behind the scar",
-    #                 validation=[
-    #                     DataRequired()
-    #                 ])
-    # if tattoos == True:
-    #     tattoos_number = IntegerField('How many tattoos does your character have?',
-    #             validators=[
-    #                 DataRequired()
-    #             ])
-    #     for i in tattoos_number:
-    #         tattoos_what = StringField('What is the tattoo?',
-    #             validator=[
-    #                 DataRequired()
-    #             ])
-    #         tattoos_where = StringField('Where is the tattoo on the body?',
-    #             validator=[
-    #                 DataRequired()
-    #             ])
     #Accessories
     pet_peeves = StringField('What pet-peeves does your character have?')
     hobbies = StringField('What hobbies does your character have?')
@@ -274,13 +242,6 @@ class CharacterForm(FlaskForm):
     book_worm= BooleanField('Book worm')
     fears = StringField('What is your character greatest fear?')
     address = BooleanField ('Tick if you want to write your characters address')
-    # if address == True:
-    #     address_1 = StringField('Address Line 1: ')
-    #     address_2 = StringField('Address Line 2: ')
-    #     town = StringField('Town: ')
-    #     county_state =StringField('County/State: ')
-    #     country= StringField('Country: ')
-    #     postcode_zipcode = StringField('Post Code/Zip Code:')
     gender = SelectField('what is their gender?',
                 choices=[
                     ('male','Male'),
@@ -294,147 +255,152 @@ class CharacterForm(FlaskForm):
                 ('yes','Yes'),
                 ('No','No')
             ])
-    # if mother == 'yes':
-    #     mother_first_name = StringField('Whats the mothers first name?',
-    #             validators=[
-    #                 DataRequired()
-    #             ])
-    #     mother_last_name = StringField('Whats the mothers last name?',
-    #             validators=[
-    #                 DataRequired()
-    #             ])
-    #     mother_age = IntegerField('How old is their mother?',
-    #             validators=[
-    #                 DataRequired()
-    #             ])
-    #     mother_gender = SelectField('what is the gender of their mother?',
-    #             choices=[
-    #                 ('male','Male'),
-    #                 ('female','Female'),
-    #                 ('gender_fluid','Gender Fluid')
-    #             ])
     father= SelectField('Does your character know their biological father?',
         choices=[
                 ('yes','Yes'),
                 ('No','No')
             ])
-    # if father == 'yes':
-    #     father_first_name = StringField('Whats the fathers first name?',
-    #             validators=[
-    #                 DataRequired()
-    #             ])
-    #     father_last_name = StringField('Whats the fathers last name?',
-    #             validators=[
-    #                 DataRequired()
-    #             ])
-    #     father_age = IntegerField('How old is their father',
-    #             validators=[
-    #                 DataRequired()
-    #             ])
-    #     father_gender = SelectField('what is the gender of their father?',
-    #             choices=[
-    #                 ('male','Male'),
-    #                 ('female','Female'),
-    #                 ('gender_fluid','Gender Fluid')
-    #             ])
     relationships = SelectField('Are there any other types of relationships?',
             choices=[
                 ('yes','Yes'),
                 ('No','No')
             ])
-    # while relationships == 'Yes':
-    #     reationship_type= SelectField('What type of relationship?',
-    #             choices=[
-    #                 ('fatherfigure','Father Figure'),
-    #                 ('motherfigure','Mother Figure'),
-    #                 ('brother','Brother'),
-    #                 ('sister','Sister')
-    #                 ('brother_friend','Like a Brother')
-    #                 ('sister_friend','Like a Sister')
-    #                 ('son','Son'),
-    #                 ('daughter','Daughter'),
-    #                 ('uncle','Uncle'),
-    #                 ('aunt','Aunt'),
-    #                 ('best_friend','best Friend'),
-    #                 ('boyfriend','Boyfriend'),
-    #                 ('girlfriend','Girlfriend'),
-    #                 ('partner','Partner'),
-    #                 ('friends_with_benefits','Friends with Benefits'),
-    #                 ('its_complicated',~"It's Complicated"),
-    #                 ('aquaintance','Aquaintance'),
-    #                 ('dislike','Dislike'),
-    #                 ('enemy','Enemy')
-    #             ])
-    #     r_first_name = StringField('Whats the first name of the person?',
-    #             validators=[
-    #                 DataRequired()
-    #             ])
-    #     r_last_name = StringField('Whats the last name of the person?',
-    #             validators=[
-    #                 DataRequired()
-    #             ])
-    #     r_age = IntegerField('How old is the person?',
-    #             validators=[
-    #                 DataRequired()
-    #             ])
-    #     r_length = StringField('How long has your character known this person?',
-    #             validators=[
-    #                 DataRequired()
-    #             ])
-    #     r_gender = SelectField('what is the gender of the person?',class deleteform(FlaskForm):
-    yes = SubmitField('Yes')
-    
-    #             choices=[
-    #                 ('male','Male'),
-    #                 ('female','Female'),
-    #                 ('gender_fluid','Gender Fluid')
-    #             ])
     skills_number = IntegerField('How many skills does your character have?',
             validators=[
                 DataRequired()
             ])
-    #for i in skills_number:
-        #skills_what = StringField('What is the name of this skill?',
-        #        validators= [
-        #            DataRequired()
-        #        ])
-        #skills_used = StringField('How is this skill used?',
-        #       validators=[
-        #            DataRequired()
-        #        ])
     magical_abilities = BooleanField('Tick here if your character has magical abilities')
-    # if magical_abilities == True:
-    #     MA_number = IntegerField('How many magiocal abilities does your character have?',
-    #             validators= [
-    #                 DataRequired()
-    #             ])
-    #     for i in MA_number:
-    #         MA_name = StringField('What is the Magical Ability?',
-    #                 validators = [
-    #                     DataRequired()
-    #                 ])
-    #         MA_used = StringField('How does your character use this magical ability?',
-    #                 validators = [
-    #                     DataRequired()
-    #                 ])
-    #         flaws = StringField('What are the flaws with this ability?',
-    #                 validators=[
-    #                     Datarequired()
-    #                 ])
-    #         limitations = StringField('What are the limitaions to this ability?',
-    #                 validators=[
-    #                     DataRequired()
-    #                 ])
-    #         price = StringField('What is the price for using this ability?',
-    #                 validators=[
-    #                     DataRequired()
-    #                 ])
     improvements = StringField('What skills does your character need to improve on?')
     submit = SubmitField('Submit')
 
 class DeleteForm(FlaskForm):
     yes = SubmitField('Yes')
-    
+
+
+#all of dees forms need to be made into pages routes and database tables!!!!
+class ScarsForm(FlaskForm):
+    scars_what=StringField('What does the scar look like?',
+            validation=[
+                DataRequired()
+            ])
+    scars_where=StringField('Where on the body is the scar?',
+            validation=[
+                DataRequired()
+            ])
+    scars_why=StringField("What's the story behind the scar",
+            validation=[
+                DataRequired()
+            ])
+    submit_yes= SubmitField('Yes')
+    submit_no = SubmitField('No')
+
+
+class TattoosForm(FlaskForm):    
+    tattoos_what = StringField('What is the tattoo?',
+        validator=[
+            DataRequired()
+        ])
+    tattoos_where = StringField('Where is the tattoo on the body?',
+        validator=[
+            DataRequired()
+        ])
+
+class RelationshipForm(FlaskForm):    
+    relationship_type= SelectField('What type of relationship?',
+            choices=[
+                ('mother','Mother'),
+                ('father','Father'),
+                ('fatherfigure','Father Figure'),
+                ('motherfigure','Mother Figure'),
+                ('brother','Brother'),
+                ('sister','Sister')
+                ('brother_friend','Like a Brother')
+                ('sister_friend','Like a Sister')
+                ('son','Son'),
+                ('daughter','Daughter'),
+                ('uncle','Uncle'),
+                ('aunt','Aunt'),
+                ('best_friend','best Friend'),
+                ('boyfriend','Boyfriend'),
+                ('girlfriend','Girlfriend'),
+                ('partner','Partner'),
+                ('friends_with_benefits','Friends with Benefits'),
+                ('its_complicated',"It's Complicated"),
+                ('aquaintance','Aquaintance'),
+                ('dislike','Dislike'),
+                ('enemy','Enemy')
+            ])
+    first_name = StringField('Whats the first name of the person?',
+            validators=[
+                DataRequired()
+            ])
+    last_name = StringField('Whats the last name of the person?',
+            validators=[
+                DataRequired()
+            ])
+    age = IntegerField('How old is the person?',
+            validators=[
+                DataRequired()
+            ])
+    length = StringField('How long has your character known this person?',
+            validators=[
+                DataRequired()
+            ])
+    gender = SelectField('what is the gender of the person?',
+            choices=[
+                ('male','Male'),
+                ('female','Female'),
+                ('gender_fluid','Gender Fluid')
+            ])
+    submit_yes = SubmitField('Yes')
+    submit_no = SubmitField('No')
+
+
+class AddressForm(FlaskForm):
+    address_1 = StringField('Address Line 1: ')
+    address_2 = StringField('Address Line 2: ')
+    town = StringField('Town: ')
+    county_state =StringField('County/State: ')
+    country= StringField('Country: ')
+    postcode_zipcode = StringField('Post Code/Zip Code:')
+    submit = SubmitField('Submit')
+
+class SkillsForm(FlaskForm):
+    skills_what = StringField('What is the name of this skill?',
+           validators= [
+               DataRequired()
+           ])
+    skills_used = StringField('How is this skill used?',
+          validators=[
+               DataRequired()
+           ])
+    submit_yes= SubmitField('Yes')
+    submit_no= SubmitField('No')
+
+class MagicalForm(FlaskForm):
+    MA_name = StringField('What is the Magical Ability?',
+            validators = [
+                DataRequired()
+            ])
+    MA_used = StringField('How does your character use this magical ability?',
+            validators = [
+                DataRequired()
+            ])
+    flaws = StringField('What are the flaws with this ability?',
+            validators=[
+                Datarequired()
+            ])
+    limitations = StringField('What are the limitaions to this ability?',
+            validators=[
+                DataRequired()
+            ])
+    price = StringField('What is the price for using this ability?',
+            validators=[
+                DataRequired()
+            ])
+    submit_yes= SubmitField('Yes')
+    submit_no = SubmitField('No')
+
 
 @login_manager.user_loader
 def load_user(id):

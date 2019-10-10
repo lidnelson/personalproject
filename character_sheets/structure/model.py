@@ -108,3 +108,82 @@ class CharacterFile(db.Model):
 			"Number of skills: ", self.skills_number, '\r\n',
 			"Magical abilities: ", self.magical_abilities,'\r\n',
 			"Skill Imporvements: ", self.improvements])
+
+class Scars(FlaskForm):
+	id = db.Column(db.Integer, primary_key=True)
+	file_id = db.Column(db.Integer, db.ForeignKey('files.id'), nullable=False)
+	scars_what = db.Column(db.String(200), nullable=False)
+	scars_where = db.Column(db.String(50), nullable=False)
+	scars_why = db.Column(db.String(200))
+
+	def __repr__(self):
+		return ''.join([
+			"File ID: ", self.file_id, '\r\n',
+			"What the scar if from: ", self.scars_what, '\r\n',
+			"Where the scar is: ", self.scars_where, '\r\n',
+			"How they got the scar: ", self.scars_why
+			])
+
+
+class Tattoos(FlaskForm):
+	id= db.Column(db.Integer, primary_key=True)
+	file_id = db.Column(db.Integer, db.ForeignKey('files.id'), nullable=False)
+	tattoos_what = db.Column(db.String(200), nullable=False)
+	tattoos_where = db.Column(db.String(50), nullable=False)
+
+	def __repr__(self):
+		return ''.join([
+			"File ID: ", self.file_id, '\r\n',
+			"What the tattoo is of: "])
+
+
+class CharacterAddress(FlaskForm):
+	id= db.Column(db.Integer, primary_key=True)
+	file_id = db.Column(db.Integer, db.ForeignKey('files.id'), nullable=False)
+	address_1 = db.Column(db.String(100),nullable=False)
+	address_2 = db.Column(db.String(100))
+	town = db.Column(db.String(100), nullable=False)
+	county = db.Column(db.String(100),nullable=False)
+	country= db.Column(db.String(100),nullable=False)
+	postcode_zipcode = db.Column(db.String(10))
+
+	def __repr__(self):
+		return ''.join([])
+
+
+class Relationships(FlaskForm):
+	id= db.Column(db.Integer, primary_key=True)
+	file_id = db.Column(db.Integer, db.ForeignKey('files.id'), nullable=False)
+	relationship_type = db.Column(db.String(30), nullable=False)
+	first_name = db.Column(db.String(50), nullable=False)
+	last_name = db.Column(db.String(50), nullable=False)
+	age = db.Column(db.Integer)
+	length = db.Column(db.Integer)
+	gender = db.Column(db.String(30), nullable=False)
+
+	def __repr__(self):
+		return ''.join([])
+
+
+
+class Skills(FlaskForm):
+	id= db.Column(db.Integer, primary_key=True)
+	file_id = db.Column(db.Integer, db.ForeignKey('files.id'), nullable=False)
+	skills_what = db.Column(db.String(100), nullable=False)
+	skills_used = db.Column(db.String(10000))
+
+	def __repr__(self):
+		return ''.join([])
+
+
+class Magical(FlaskForm):
+	id= db.Column(db.Integer, primary_key=True)
+	file_id = db.Column(db.Integer, db.ForeignKey('files.id'), nullable=False)
+	MA_name = db.Column(db.String(100), nullable=False)
+	MA_used = db.Column (db.String(10000))
+	flaws = db.Column(db.String(10000))
+	limitations = db.Column(db.String(10000))
+	price = db.Column(db.String(10000))
+
+	def __repr__(self):
+		return ''.join([])
