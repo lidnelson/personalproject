@@ -109,7 +109,7 @@ class CharacterFile(db.Model):
 			"Magical abilities: ", self.magical_abilities,'\r\n',
 			"Skill Imporvements: ", self.improvements])
 
-class Scars(FlaskForm):
+class Scars(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	file_id = db.Column(db.Integer, db.ForeignKey('files.id'), nullable=False)
 	scars_what = db.Column(db.String(200), nullable=False)
@@ -125,7 +125,7 @@ class Scars(FlaskForm):
 			])
 
 
-class Tattoos(FlaskForm):
+class Tattoos(db.Model):
 	id= db.Column(db.Integer, primary_key=True)
 	file_id = db.Column(db.Integer, db.ForeignKey('files.id'), nullable=False)
 	tattoos_what = db.Column(db.String(200), nullable=False)
@@ -134,10 +134,12 @@ class Tattoos(FlaskForm):
 	def __repr__(self):
 		return ''.join([
 			"File ID: ", self.file_id, '\r\n',
-			"What the tattoo is of: "])
+			"What the tattoo is of: ", self.tattoos_what, '\r\n',
+			"Where the tattoo is: ", self.tattoos_where
+			])
 
 
-class CharacterAddress(FlaskForm):
+class CharacterAddress(db.Model):
 	id= db.Column(db.Integer, primary_key=True)
 	file_id = db.Column(db.Integer, db.ForeignKey('files.id'), nullable=False)
 	address_1 = db.Column(db.String(100),nullable=False)
@@ -148,10 +150,18 @@ class CharacterAddress(FlaskForm):
 	postcode_zipcode = db.Column(db.String(10))
 
 	def __repr__(self):
-		return ''.join([])
+		return ''.join([
+			"File ID: ", self.file_id, '\r\n',
+			"Address line 1: ", self.address_1, '\r\n',
+			"Address line 2: ", self.address_2, '\r\n',
+			"Town: ", self.town, '\r\n',
+			"County: ", self.county, '\r\n',
+			"Country: ", self.country, '\r\n',
+			"Postcode: ", self.postcode_zipcode
+			])
 
 
-class Relationships(FlaskForm):
+class Relationships(db.Model):
 	id= db.Column(db.Integer, primary_key=True)
 	file_id = db.Column(db.Integer, db.ForeignKey('files.id'), nullable=False)
 	relationship_type = db.Column(db.String(30), nullable=False)
@@ -162,21 +172,33 @@ class Relationships(FlaskForm):
 	gender = db.Column(db.String(30), nullable=False)
 
 	def __repr__(self):
-		return ''.join([])
+		return ''.join([
+			"File ID: ", self.file_id, '\r\n',
+			"Type of relationship: ", str(self.relationship_type), '\r\n',
+			"First name: ", self.first_name, '\r\n',
+			"Last name: ", self.last-name, '\r\n',
+			"Age: ", self.age, '\r\n',
+			"Length of relationship: ", self.length, '\r\n',
+			"Gender: ", str(self.gender)
+			])
 
 
 
-class Skills(FlaskForm):
+class Skills(db.Model):
 	id= db.Column(db.Integer, primary_key=True)
 	file_id = db.Column(db.Integer, db.ForeignKey('files.id'), nullable=False)
 	skills_what = db.Column(db.String(100), nullable=False)
 	skills_used = db.Column(db.String(10000))
 
 	def __repr__(self):
-		return ''.join([])
+		return ''.join([
+			"File ID: ", self.file_id, '\r\n',
+			"Skill name: ", self.skills_what, '\r\n',
+			"How the skill is used?", self.skills_used
+			])
 
 
-class Magical(FlaskForm):
+class Magical(db.Model):
 	id= db.Column(db.Integer, primary_key=True)
 	file_id = db.Column(db.Integer, db.ForeignKey('files.id'), nullable=False)
 	MA_name = db.Column(db.String(100), nullable=False)
@@ -186,4 +208,11 @@ class Magical(FlaskForm):
 	price = db.Column(db.String(10000))
 
 	def __repr__(self):
-		return ''.join([])
+		return ''.join([
+			"File ID: ", self.file_id, '\r\n',
+			"Name: ", self.MA_name, '\r\n',
+			"How its used: ", self.MA_used, '\r\n',
+			"The Flaws: ", self.flaws, '\r\n',
+			"The limitations: ", self.limitations, '\r\n',
+			"Paid Price: ", self.price
+			])

@@ -313,9 +313,9 @@ class RelationshipForm(FlaskForm):
                 ('fatherfigure','Father Figure'),
                 ('motherfigure','Mother Figure'),
                 ('brother','Brother'),
-                ('sister','Sister')
-                ('brother_friend','Like a Brother')
-                ('sister_friend','Like a Sister')
+                ('sister','Sister'),
+                ('brother_friend','Like a Brother'),
+                ('sister_friend','Like a Sister'),
                 ('son','Son'),
                 ('daughter','Daughter'),
                 ('uncle','Uncle'),
@@ -388,7 +388,7 @@ class MagicalForm(FlaskForm):
             ])
     flaws = StringField('What are the flaws with this ability?',
             validators=[
-                Datarequired()
+                DataRequired()
             ])
     limitations = StringField('What are the limitaions to this ability?',
             validators=[

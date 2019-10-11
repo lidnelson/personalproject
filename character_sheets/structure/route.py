@@ -2,7 +2,7 @@ from flask import render_template, redirect, url_for, request
 from flask_login import login_user, current_user, logout_user, login_required
 from structure import app, db, bcrypt, login_manager, LoginManager
 from structure.model import Users, Files, CharacterFile 
-from structure.form import RegistrationForm, LoginForm, UpdateAccountForm, FilesForm, CharacterForm #CApperenceForm, CPersonalityForm, CMinorDetailsForm, CAbilitiesForm, DeleteForm
+from structure.form import ScarsForm, TattoosForm, AddressForm, RegistrationForm, LoginForm, UpdateAccountForm, FilesForm, CharacterForm,  MagicalForm, DeleteForm, SkillsForm, RelationshipForm
 
 tempFormData = ""
 
@@ -146,11 +146,7 @@ def characterform():
 		db.session.commit()
 		return redirect(url_for('account'))
 	else:
-		print('hihihihihihihhihihihihi')
-		# print(form1.errors)
-		# print(form2.errors)
-		# print(form3.errors)
-		# print(form4.errors)
+		print(form.errors)
 	return render_template('characterform.html', title ='Character Form', form=form)
 
 
@@ -197,6 +193,122 @@ def edit(file_id):
 	fileData=Files.query.filter_by(id=file_id)
 	return render_template('editfile.html',title='Edit file page')
 
+@app.route('/account/file/<int(min=1):file_id>/scars_form')
+@login_required
+def scars(file_id):
+	form =  ScarsForm()
+	if form.validate_on_submit():
+		ScarsData = Scars(
+			file_id = file_id,
+			scars_what = form.scars_what.data,
+			scars_where =  form.scars_where.data,
+			scars_why = form.scars_why.data
+			)
+		db.session.add(ScarsData)
+		db.session.commit()
+		if form.submit_yes.data:
+			return redirect(url_for('scars'))
+		if form.submit_no.data:
+			return redirect(url_for('account'))
+	return render_template('scar.html', title='Scars form', form=form)
+
+@app.route('/account/file/<int(min=1):file_id>/tattoos_form')
+@login_required
+def tattoos(file_id):
+	form =  TattoosForm()
+	if form.validate_on_submit():
+		TattooData = Tattoos(
+			file_id = file_id,
+			tattoos_what = form.tattoos_what.data,
+			tattoos_where =  form.tattoos_where.data
+			)
+		db.session.add(TattooData)
+		db.session.commit()
+		if form.submit_yes.data:
+			return redirect(url_for('scars'))
+		if form.submit_no.data:
+			return redirect(url_for('account'))
+	return render_template('tattoo.html', title='Tattoos form', form=form)
+
+@app.route('/account/file/<int(min=1):file_id>/address_form')
+@login_required
+def address(file_id):
+	form =  AddressForm()
+	if form.validate_on_submit():
+		AddressData = CharacterAddress(
+			file_id = file_id,
+			address_1 = form.address_1.data,
+			address_2 =  form.address_2.data,
+			town = form.town.data,
+			county = form.county.data,
+			country = form.country.data,
+			postcode_zipcode = form.postcode_zipcode.data
+			)
+		db.session.add(AddressData)
+		db.session.commit()
+		return redirect(url_for('account'))
+	return render_template('address.html', title='Address form', form=form)
+
+@app.route('/account/file/<int(min=1):file_id>/relationship_form')
+@login_required
+def relationships(file_id):
+	form =  RelationshipForm()
+	if form.validate_on_submit():
+		Data = Relationships(
+			file_id = file_id,
+			relationship_type = form.relationship_type.data,
+			first_name =  form.first_name.data,
+			last_name = form.last_name.data,
+			age = form.age.data,
+			length = form.length.data,
+			gender = form.gender.data
+			)
+		db.session.add(Data)
+		db.session.commit()
+		if form.submit_yes.data:
+			return redirect(url_for('scars'))
+		if form.submit_no.data:
+			return redirect(url_for('account'))
+	return render_template('relationships.html', title='Relationship form', form=form)
+
+@app.route('/account/file/<int(min=1):file_id>/skill_form')
+@login_required
+def skill(file_id):
+	form =  SkillsForm()
+	if form.validate_on_submit():
+		Data = Skills(
+			file_id = file_id,
+			skills_what = form.skills_what.data,
+			skills_used =  form.skills_used.data
+			)
+		db.session.add(Data)
+		db.session.commit()
+		if form.submit_yes.data:
+			return redirect(url_for('scars'))
+		if form.submit_no.data:
+			return redirect(url_for('account'))
+	return render_template('skill.html', title='Skills form', form=form)
+
+@app.route('/account/file/<int(min=1):file_id>/magical_abilities_form')
+@login_required
+def magical(file_id):
+	form =  MagicalForm()
+	if form.validate_on_submit():
+		Data = Magical(
+			file_id = file_id,
+			MA_name = form.MA_name.data,
+			MA_used =  form.MA_used.data,
+			flaws = form.flaws.data,
+			limitations = form.limitations.data,
+			price = form.price.data
+			)
+		db.session.add(Data)
+		db.session.commit()
+		if form.submit_yes.data:
+			return redirect(url_for('scars'))
+		if form.submit_no.data:
+			return redirect(url_for('account'))
+	return render_template('magical.html', title='Magical Abilities form', form=form)
 
 @login_manager.user_loader
 def load_user(id):
