@@ -210,7 +210,7 @@ def scars(file_id):
 			return redirect(url_for('scars'))
 		if form.submit_no.data:
 			return redirect(url_for('account'))
-	return render_template('scar.html', title='Scars form', form=form)
+	return render_template('scars.html', title='Scars form', form=form)
 
 @app.route('/account/file/<int(min=1):file_id>/tattoos_form')
 @login_required
@@ -228,7 +228,7 @@ def tattoos(file_id):
 			return redirect(url_for('scars'))
 		if form.submit_no.data:
 			return redirect(url_for('account'))
-	return render_template('tattoo.html', title='Tattoos form', form=form)
+	return render_template('tattoos.html', title='Tattoos form', form=form)
 
 @app.route('/account/file/<int(min=1):file_id>/address_form')
 @login_required

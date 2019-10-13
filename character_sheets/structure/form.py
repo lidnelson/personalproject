@@ -277,18 +277,17 @@ class DeleteForm(FlaskForm):
     yes = SubmitField('Yes')
 
 
-#all of dees forms need to be made into pages routes and database tables!!!!
 class ScarsForm(FlaskForm):
     scars_what=StringField('What does the scar look like?',
-            validation=[
+            validators=[
                 DataRequired()
             ])
     scars_where=StringField('Where on the body is the scar?',
-            validation=[
+            validators=[
                 DataRequired()
             ])
     scars_why=StringField("What's the story behind the scar",
-            validation=[
+            validators=[
                 DataRequired()
             ])
     submit_yes= SubmitField('Yes')
@@ -297,13 +296,15 @@ class ScarsForm(FlaskForm):
 
 class TattoosForm(FlaskForm):    
     tattoos_what = StringField('What is the tattoo?',
-        validator=[
+        validators=[
             DataRequired()
         ])
     tattoos_where = StringField('Where is the tattoo on the body?',
-        validator=[
+        validators=[
             DataRequired()
         ])
+    submit_yes= SubmitField('Yes')
+    submit_no = SubmitField('No')
 
 class RelationshipForm(FlaskForm):    
     relationship_type= SelectField('What type of relationship?',

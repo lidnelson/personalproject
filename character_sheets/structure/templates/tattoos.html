@@ -1,6 +1,27 @@
 {% extends "layout.html" %}
 {% block page_content %}
-	
+<h2>Tattoos</h2>
+<div class="form">
+<form method='POST', action="">
+	{{ form.hidden_tag() }}
+	<div class="form-group">
+		{{ form.tattoos_what.label }}
+		{{ form.tattoos_what }}
+	</div>
+	<div class="form-group">
+		{{ form.tattoos_where.label }}
+		{{ form.tattoos_where }}
+	</div>
+	<div align="center">
+	<p>Do you want to add another tattoo?</p>
+
+	<span class="form-group">
+		{{ form.submit_yes }}
+		{{ form.submit_no }}
+	</span>
+	</div>
+</form>
+</div>	
 
 	
 {% endblock %}
