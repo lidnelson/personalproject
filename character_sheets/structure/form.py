@@ -126,6 +126,7 @@ class CharacterForm(FlaskForm):
                 ('black', 'Black'),
                 ('green', 'Green'),
                 ('brown', 'Brown'),
+                ('hazel', 'Hazel'),
                 ('purple', 'Purple'),
                 ('magenta', 'Magenta'),
                 ('red', 'Red'),

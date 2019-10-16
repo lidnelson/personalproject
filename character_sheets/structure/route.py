@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, request
 from flask_login import login_user, current_user, logout_user, login_required
 from structure import app, db, bcrypt, login_manager, LoginManager
-from structure.model import Users, Files, CharacterFile 
+from structure.model import Users, Files, CharacterFile, Scars, Tattoos, CharacterAddress, Relationships, Skills, Magical 
 from structure.form import ScarsForm, TattoosForm, AddressForm, RegistrationForm, LoginForm, UpdateAccountForm, FilesForm, CharacterForm,  MagicalForm, DeleteForm, SkillsForm, RelationshipForm
 
 tempFormData = ""
@@ -193,7 +193,7 @@ def edit(file_id):
 	fileData=Files.query.filter_by(id=file_id)
 	return render_template('editfile.html',title='Edit file page')
 
-@app.route('/account/file/<int(min=1):file_id>/scars_form')
+@app.route('/account/file/<int(min=1):file_id>/scars_form', methods=['GET', 'POST'])
 @login_required
 def scars(file_id):
 	form =  ScarsForm()
@@ -212,7 +212,7 @@ def scars(file_id):
 			return redirect(url_for('account'))
 	return render_template('scars.html', title='Scars form', form=form)
 
-@app.route('/account/file/<int(min=1):file_id>/tattoos_form')
+@app.route('/account/file/<int(min=1):file_id>/tattoos_form', methods=['GET', 'POST'])
 @login_required
 def tattoos(file_id):
 	form =  TattoosForm()
@@ -230,7 +230,7 @@ def tattoos(file_id):
 			return redirect(url_for('account'))
 	return render_template('tattoos.html', title='Tattoos form', form=form)
 
-@app.route('/account/file/<int(min=1):file_id>/address_form')
+@app.route('/account/file/<int(min=1):file_id>/address_form', methods=['GET', 'POST'])
 @login_required
 def address(file_id):
 	form =  AddressForm()
@@ -249,7 +249,7 @@ def address(file_id):
 		return redirect(url_for('account'))
 	return render_template('address.html', title='Address form', form=form)
 
-@app.route('/account/file/<int(min=1):file_id>/relationship_form')
+@app.route('/account/file/<int(min=1):file_id>/relationship_form', methods=["GET", "POST"])
 @login_required
 def relationships(file_id):
 	form =  RelationshipForm()
@@ -267,11 +267,11 @@ def relationships(file_id):
 		db.session.commit()
 		if form.submit_yes.data:
 			return redirect(url_for('scars'))
-		if form.submit_no.data:
+		elif form.submit_no.data:
 			return redirect(url_for('account'))
 	return render_template('relationships.html', title='Relationship form', form=form)
 
-@app.route('/account/file/<int(min=1):file_id>/skill_form')
+@app.route('/account/file/<int(min=1):file_id>/skill_form', methods=['GET', 'POST'])
 @login_required
 def skill(file_id):
 	form =  SkillsForm()
@@ -289,7 +289,7 @@ def skill(file_id):
 			return redirect(url_for('account'))
 	return render_template('skill.html', title='Skills form', form=form)
 
-@app.route('/account/file/<int(min=1):file_id>/magical_abilities_form')
+@app.route('/account/file/<int(min=1):file_id>/magical_abilities_form', methods=['GET', 'POST'])
 @login_required
 def magical(file_id):
 	form =  MagicalForm()
@@ -313,7 +313,3 @@ def magical(file_id):
 @login_manager.user_loader
 def load_user(id):
 	return Users.query.get(int(id))
-# CApperenceForm
-# CPersonalityForm
-# CMinorDetailsForm
-# CAbilitiesForm

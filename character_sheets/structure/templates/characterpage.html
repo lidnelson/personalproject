@@ -1,106 +1,77 @@
 {% extends 'layout.html' %}
 {% block page_content %}
- 
 <div>
-	<span align="right" href='/account/file/{{ file.id }}/delete'><a>Delete</a></span>
-	<span align="right"><a>Edit Character</a></span>
+	{%for file in file %}
+	<h2 align="center">{{ file.character_first_name }} {{ file.character_last_name }}</h2>
+	<p align='center'>File: {{ file.file_name }} <span align="center" style='color:darkblue'><a>Edit File</a></span></p>
+	<p align='center'>{{ file.character_description }}</p>
+
+	{% endfor %}
+</div>
+
+<div align="center">
+	<span style='color:red'><a href='/account/file/{{ file.id }}/delete'>Delete Character</a></span>
+	<span style='color:darkblue'><a>Edit Character</a></span>
 </div>
 <div>
 	{% for file in file %}
-	<h2>File: {{ file.file_name }}</h2>
-	<p><h3>{{ file.character_first_name }} {{ file.character_last_name }}</h3></p>
-	<p>{{ file.character_description }}
-	<h4>Appearence</h4>
+
+
+	<h3 align="center">Appearence</h3>
 	<p>Eye colour: {{ file1.eye_colour }}</p>
-	<div class="w3-cell-row">
-		<div class="w3-cell">
-	<p>{{ file.character_first_name }} {{ file.character_last_name }} has scars (True or False):
-	</p>
-	</div>
-	<div class="w3-cell">
-	{{ file1.scars }}
-	</div>
-	</div>
-	<p><div class="w3-cell-row">
-		<div class="w3-cell">
-	<p>{{ file.character_first_name }} {{ file.character_last_name }} has tattoos (True or False):
-	</p>
-	</div>
-	<div class="w3-cell">
-	{{ file1.tattoos }}
-	</div>
-	</div>
-	<h4>Personality</h4>
-	<p>Pet-peeves : {{ file1.pet_peeves }}</p>
-	<p>Hobbies : {{ file1.hobbies }}</p>
-	<p>Alignment : {{ file.alignment }}</p>
-	<p>Accent : {{ file1.accent }}</p>
-	<p>{{ file.character_first_name }} {{ file.character_last_name }} is passionate about {{ file1.passionate }}</p>
+	<p>{{ file.character_first_name }} {{ file.character_last_name }} has scars (True or False):  ............{{ file1.scars }}............ </p>
+	<span style='color:darkblue'><a href='/account/file/{{ file.id }}/scars_form'>Add scars</a></span>
+	<p>{{ file.character_first_name }} {{ file.character_last_name }} has tattoos (True or False):  .........{{ file1.tattoos }}..........</p>
+	<span style='color:darkblue'><a href='/account/file/{{ file.id }}/tattoos_form'>Add tattoos</a></span>
+
+
+
+	<h3 align="center">Personality</h3>
+	<p>Pet-peeves : .......{{ file1.pet_peeves }}.......</p>
+	<p>Hobbies : ......{{ file1.hobbies }}.......</p>
+	<p>Alignment : .......{{ file.alignment }}.......</p>
+	<p>Accent : ......{{ file1.accent }}......</p>
+	<p>{{ file.character_first_name }} {{ file.character_last_name }} is passionate about ....{{ file1.passionate }}....</p>
 	<p>{{ file.character_first_name }} {{ file.character_last_name }} is a(n) ... {{ file1.earlybird_nightowl }}</p>
-	<p>{{ file.character_first_name }} {{ file.character_last_name }} faavourite meal is ... {{ file1.favourite_meal }}</p>
+	<p>{{ file.character_first_name }} {{ file.character_last_name }} favourite meal is ... {{ file1.favourite_meal }}</p>
 	<p>{{ file.character_first_name }} {{ file.character_last_name }}'s main goal is to ... {{ file1.goals }}</p>
 	<p>In thier own time {{ file.character_first_name }} {{ file.character_last_name }} likes to listen to ... {{ file1.music_genre }} ... music </p>
-	<p><div class="w3-cell-row">
-		<div class="w3-cell">
-	<p>{{ file.character_first_name }} {{ file.character_last_name }} is a cat person (True or False):
+	<p>{{ file.character_first_name }} {{ file.character_last_name }} is a cat person (True or False):	..........{{ file1.cat_person }}...........
 	</p>
-	</div>
-	<div class="w3-cell">
-	{{ file1.cat_person }}
-	</div>
-	</div> 
-	<p><div class="w3-cell-row">
-		<div class="w3-cell">
-	<p>{{ file.character_first_name }} {{ file.character_last_name }} is a dog person (True or False):
+	<p>{{ file.character_first_name }} {{ file.character_last_name }} is a dog person (True or False):..........{{ file1.dog_person }}.........
 	</p>
-	</div>
-	<div class="w3-cell">
-	{{ file1.dog_person }}
-	</div>
-	</div>
-	<p>{{ file.character_first_name }} {{ file.character_last_name }}'s ideas about a romantic relationship are ... {{ file1.romantic_relationship_ideals }}</p>
-	<p>Does {{ file.character_first_name }} {{ file.character_last_name }} like to celebrate thier birthday? ...{{ file1.partial_birthday_celebration }}...</p>
+	<p>{{ file.character_first_name }} {{ file.character_last_name }}'s ideas about a romantic relationship are ......... {{ file1.romantic_relationship_ideals }}.........</p>
+	<p>Does {{ file.character_first_name }} {{ file.character_last_name }} like to celebrate thier birthday? ..........{{ file1.partial_birthday_celebration }}.........</p>
 	<p> Does {{ file.character_first_name }} {{ file.character_last_name }} find it easy to apologise? ...{{ file1.easy_appologiser }}...</p>
-	<p> Was {{ file.character_first_name }} {{ file.character_last_name }} bullied in school? ...{{ file1.bullied }}... </p>
+	<p> Was {{ file.character_first_name }} {{ file.character_last_name }} bullied in school? .........{{ file1.bullied }}......... </p>
 	<p> {{ file.character_first_name }} {{ file.character_last_name }} is {{ file1.smarts }}</p>
-	<p> {{ file.character_first_name }} {{ file.character_last_name }} id from ...{{ file1.country }}...</p>
-	<p><div class="w3-cell-row">
-		<div class="w3-cell">
-	<p>{{ file.character_first_name }} {{ file.character_last_name }} is a book worm (True or False):
-	</p>
-	</div>
-	<div class="w3-cell">
-	{{ file1.book_worm }}
-	</div>
-	</div>
-	<p> {{ file.character_first_name }} {{ file.character_last_name }} has a fear of ...{{ file1.fears }}</p>
-	<h4>{{ file.character_first_name }} {{ file.character_last_name }}'s Details</h4>
-	<p><div class="w3-cell-row">
-		<div class="w3-cell">
-	<p>You the Author know where {{ file.character_first_name }} {{ file.character_last_name }} lives and what the address is (True or False):
-	</p>
-	</div>
-	<div class="w3-cell">
-	{{ file1.address }}
-	</div>
-	</div>
-	<p> {{ file.character_first_name }} {{ file.character_last_name }} identifies as ...{{ file1.gender }}</p>
-	<p>{{ file.character_first_name }} {{ file.character_last_name }}'s birthday is ...{{ file1.birthday }}</p>
-	<p>Does {{ file.character_first_name }} {{ file.character_last_name }} know thier mother? ...{{ file1.mother }}</p>
-	<p>Does {{ file.character_first_name }} {{ file.character_last_name }} know thier father? ...{{ file1.father }}</p>
-	<p>Do you have any relationship details you'd like to add for {{ file.character_first_name }} {{ file.character_last_name }}? ...{{ file1.relationships }}</p>
-	<h4>Abilities</h4>
+	<p> {{ file.character_first_name }} {{ file.character_last_name }} is from .........{{ file1.country }}..........</p>
+	<p>{{ file.character_first_name }} {{ file.character_last_name }} is a book worm (True or False):  ...........{{ file1.book_worm }}...........</p>
+	
+	<p> {{ file.character_first_name }} {{ file.character_last_name }} has a fear of .........{{ file1.fears }}........</p>
+
+
+
+	<h3 align="center">{{ file.character_first_name }} {{ file.character_last_name }}'s Details</h3>
+	<p>You the Author know where {{ file.character_first_name }} {{ file.character_last_name }} lives and what the address is (True or False): .........{{ file1.address }}..........</p>	
+	<span align="right" style='color:darkblue'><a href='/account/file/{{ file.id }}/address_form'>Add Address</a></span>
+
+	<p> {{ file.character_first_name }} {{ file.character_last_name }} identifies as .............{{ file1.gender }}..............</p>
+	<p>{{ file.character_first_name }} {{ file.character_last_name }}'s birthday is .........{{ file1.birthday }}.........</p>
+	<p>Does {{ file.character_first_name }} {{ file.character_last_name }} know thier mother? .........{{ file1.mother }}........</p>
+	<p>Does {{ file.character_first_name }} {{ file.character_last_name }} know thier father? ..........{{ file1.father }}.........</p>
+	<p>Do you have any relationship details you'd like to add for {{ file.character_first_name }} {{ file.character_last_name }}? ........{{ file1.relationships }}........</p>
+
+
+	
+	<h3 align="center">Abilities</h3>
 	<p>{{ file.character_first_name }} {{ file.character_last_name }} has {{ file1.skills_number }} skills </p>
-	<p><div class="w3-cell-row">
-		<div class="w3-cell">
-	<p>{{ file.character_first_name }} {{ file.character_last_name }} has magical abilities (True or False):
+	<span align="right" style='color:darkblue'><a href='/account/file/{{ file.id }}/skill_form'>Add skills</a></span>
+	<p>{{ file.character_first_name }} {{ file.character_last_name }} has magical abilities (True or False):  ............{{ file1.magical_abilities }}............
 	</p>
-	</div>
-	<div class="w3-cell">
-	{{ file1.magical_abilities }}
-	</div>
-	</div>
-	<p>{{ file.character_first_name }} {{ file.character_last_name }} needs to improve on ...{{ file1.improvements }}</p>
+	<span align="right" style='color:darkblue'><a href='/account/file/{{ file.id }}/magical_abilities_form'>Add Magical Ability</a></span>
+	
+	<p>{{ file.character_first_name }} {{ file.character_last_name }} needs to improve on ..........{{ file1.improvements }}...........</p>
 
 
 	{% endfor %}
