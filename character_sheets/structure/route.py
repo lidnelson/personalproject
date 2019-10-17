@@ -161,7 +161,7 @@ def characterpage(file_id):
 	skill = Skills.query.filter_by(file_id=file_id).all()
 	magic = Magical.query.filter_by(file_id=file_id).all()
 	relationship= Relationships.query.filter_by(file_id=file_id).all()
-	return render_template('characterpage.html', title="Charater page", scars=scars, tattoos=tattoos, address=address, skill=skill, magic=magic, relationship=relationship,file1=characterData, file=fileData)
+	return render_template('characterpage.html', title="Charater page", scars=scars, tattoos=tattoos, address=address, skills=skill, magical=magic, relationships=relationship,file1=characterData, file=fileData)
 
 @app.route('/account/delete', methods=['GET','POST'])
 @login_required
@@ -184,20 +184,88 @@ def deleteaccount():
 def deletecharacter(file_id):
 	form= DeleteForm()
 	file= Files.query.filter_by(id=file_id).first()
-	print(file_id)
 	if form.yes.data:
 		fileData= Files.query.filter_by(id=file_id).first()
-		print(fileData)
 		db.session.delete(fileData)
 		db.session.commit()
 		return redirect(url_for('account'))	
 	return render_template('deletefile.html',title='Delete File Page', form=form)
 
-@app.route('/account/file/<int(min=1):file_id>/edit')
+@app.route('/account/file/<int(min=1):file_id>/edit_file_name')
 @login_required
-def edit(file_id):
-	fileData=Files.query.filter_by(id=file_id)
-	return render_template('editfile.html',title='Edit file page')
+def editfile(file_id):
+	form = FilesForm()
+	file=Files.query.filter_by(id=file_id).first()
+	return render_template('createfile.html',title='Edit file', form=form)
+
+@app.route('/account/file/<int(min=1):file_id>/edit_character')
+@login_required
+def editcharacter(file_id):
+	form = CharacterForm()
+	Chara = CharacterFile.query.filter_by(file_id=file_id).first()
+	return render_template('characterform.html', title='Edit Character', form=form)
+
+
+@app.route('/account/file/<int(min=1):file_id>/scar/<int(min=1):scars_id>/delete', methods=['GET','POST'])
+@login_required
+def deletescar(file_id, scars_id):
+	form = DeleteForm()
+	scar = Scars.query.filter_by(id=scars_id).first()
+	if form.yes.data:
+		scarData = Scars.query.filter_by(id=scars_id).first()
+		db.session.delete(scarData)
+		db.session.commit()
+		return redirect (url_for('characterpage', file_id=file_id))
+	return render_template('deletescars.html', title='Delete scar', form=form)
+
+@app.route('/account/file/<int(min=1):file_id>/tattoo/<int(min=1):tattoos_id>/delete', methods=['GET','POST'])
+@login_required
+def deletetattoo(file_id, tattoos_id):
+	form = DeleteForm()
+	tattoo = Tattoos.query.filter_by(id=tattoos_id).first()
+	if form.yes.data:
+		print('hellow?')
+		tattooData = Tattoos.query.filter_by(id=tattoos_id).first()
+		db.session.delete(tattooData)
+		db.session.commit()
+		return redirect (url_for('characterpage', file_id=file_id))
+	return render_template('deletetattoo.html', title='Delete tattoo', form=form)
+
+@app.route('/account/file/<int(min=1):file_id>/skill/<int(min=1):skills_id>/delete', methods=['GET','POST'])
+@login_required
+def deleteskill(file_id, skills_id):
+	form = DeleteForm()
+	skill = Skills.query.filter_by(id=skills_id).first()
+	if form.yes.data:
+		skillData = Skills.query.filter_by(id=skills_id).first()
+		db.session.delete(skillData)
+		db.session.commit()
+		return redirect (url_for('characterpage', file_id=file_id))
+	return render_template('deleteskill.html', title='Delete skill', form=form)
+
+@app.route('/account/file/<int(min=1):file_id>/magical_ability/<int(min=1):magic_id>/delete', methods=['GET','POST'])
+@login_required
+def deletemagic(file_id, magic_id):
+	form = DeleteForm()
+	magic = Magical.query.filter_by(id=magic_id).first()
+	if form.yes.data:
+		magicData = Magical.query.filter_by(id=magic_id).first()
+		db.session.delete(magicData)
+		db.session.commit()
+		return redirect (url_for('characterpage', file_id=file_id))
+	return render_template('deletemagic.html', title='Delete magical ability', form=form)
+
+@app.route('/account/file/<int(min=1):file_id>/relationship/<int(min=1):relationship_id>/delete', methods=['GET','POST'])
+@login_required
+def deleterelationship(file_id, relationship_id):
+	form = DeleteForm()
+	relationship = Relationships.query.filter_by(id=relationship_id).first()
+	if form.yes.data:
+		Data = Relationships.query.filter_by(id=relationship_id).first()
+		db.session.delete(Data)
+		db.session.commit()
+		return redirect (url_for('characterpage', file_id=file_id))
+	return render_template('deleterelationship.html', title='Delete magical ability', form=form)	
 
 @app.route('/account/file/<int(min=1):file_id>/scars_form', methods=['GET', 'POST'])
 @login_required
@@ -217,7 +285,7 @@ def scars(file_id):
 		if form.submit_yes.data:
 			return redirect(url_for('scars', file_id=file_id))
 		if form.submit_no.data:
-			return redirect(url_for('account'))
+			return redirect(url_for('characterpage', file_id=file_id))
 	return render_template('scars.html', title='Scars form', form=form)
 
 @app.route('/account/file/<int(min=1):file_id>/tattoos_form', methods=['GET', 'POST'])
@@ -235,9 +303,9 @@ def tattoos(file_id):
 		db.session.add(TattooData)
 		db.session.commit()
 		if form.submit_yes.data:
-			return redirect(url_for('tattoos'))
+			return redirect(url_for('tattoos', file_id=file_id))
 		if form.submit_no.data:
-			return redirect(url_for('account'))
+			return redirect(url_for('characterpage', file_id=file_id))
 	return render_template('tattoos.html', title='Tattoos form', form=form)
 
 @app.route('/account/file/<int(min=1):file_id>/address_form', methods=['GET', 'POST'])
@@ -256,7 +324,7 @@ def address(file_id):
 			)
 		db.session.add(AddressData)
 		db.session.commit()
-		return redirect(url_for('account'))
+		return redirect(url_for('characterpage', file_id=file_id))
 	return render_template('address.html', title='Address form', form=form)
 
 @app.route('/account/file/<int(min=1):file_id>/relationship_form', methods=["GET", "POST"])
@@ -276,9 +344,9 @@ def relationships(file_id):
 		db.session.add(Data)
 		db.session.commit()
 		if form.submit_yes.data:
-			return redirect(url_for('scars'))
+			return redirect(url_for('relationships', file_id=file_id))
 		elif form.submit_no.data:
-			return redirect(url_for('account'))
+			return redirect(url_for('characterpage', file_id=file_id))
 	return render_template('relationships.html', title='Relationship form', form=form)
 
 @app.route('/account/file/<int(min=1):file_id>/skill_form', methods=['GET', 'POST'])
@@ -294,9 +362,9 @@ def skill(file_id):
 		db.session.add(Data)
 		db.session.commit()
 		if form.submit_yes.data:
-			return redirect(url_for('scars'))
+			return redirect(url_for('skill', file_id=file_id))
 		if form.submit_no.data:
-			return redirect(url_for('account'))
+			return redirect(url_for('characterpage', file_id=file_id))
 	return render_template('skill.html', title='Skills form', form=form)
 
 @app.route('/account/file/<int(min=1):file_id>/magical_abilities_form', methods=['GET', 'POST'])
@@ -315,9 +383,9 @@ def magical(file_id):
 		db.session.add(Data)
 		db.session.commit()
 		if form.submit_yes.data:
-			return redirect(url_for('scars'))
+			return redirect(url_for('magical', file_id=file_id))
 		if form.submit_no.data:
-			return redirect(url_for('account'))
+			return redirect(url_for('characterpage', file_id=file_id))
 	return render_template('magical.html', title='Magical Abilities form', form=form)
 
 @login_manager.user_loader

@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+{% block page_content %}
+<div>
+	<p style='color:red', align="center">Are you sure you want to remove this magical ability?</p>
+</div>
+<div class="form">
+	<form method='POST', activity="">
+		{{ form.hidden_tag() }}
+		<div class="form-group", align="center">
+			{{ form.yes }}
+			<span><a href='/account/file/{{ file_id }}'><input type="button" value="No"></a></span>
+		</div>
+	</form>
+</div>
+</div>
+{% endblock %}

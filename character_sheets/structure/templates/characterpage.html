@@ -3,7 +3,7 @@
 <div>
 	{% for file in file %}
 	<h2 align="center">{{ file.character_first_name }} {{ file.character_last_name }}</h2>
-	<p align='center'>File: {{ file.file_name }} <span align="center" style='color:darkblue'><a>Edit File</a></span></p>
+	<p align='center'>File: {{ file.file_name }} <span align="center" style='color:darkblue'><a href='/account/file/{{ file.id }}/edit_file_name'>Edit File</a></span></p>
 	<p align='center'>{{ file.character_description }}</p>
 
 	{% endfor %}
@@ -11,7 +11,7 @@
 
 <div align="center">
 	<span style='color:red'><a href='/account/file/{{ file.id }}/delete'>Delete Character</a></span>
-	<span style='color:darkblue'><a>Edit Character</a></span>
+	<span style='color:darkblue'><a href= '/account/file/{{ file.id }}/edit_character'>Edit Character</a></span>
 </div>
 <div>
 	{% for file in file %}
@@ -28,7 +28,7 @@
 		<h4>{{ scar.scars_what }}</h4>
 		<p>Located: {{ scar.scars_where }}</p>
 		<p>History: {{ scar.scars_why }}</p>
-		<a href =''>delete</a>
+		<a style='color:red' href ='/account/file/{{ file.id }}/scar/{{ scar.id }}/delete'>delete</a>
 		{% endfor %}
 	</div>
 
@@ -39,7 +39,7 @@
 		{% for tattoo in tattoos %}
 		<h4>{{ tattoo.tattoos_what }}</h4>
 		<p>Located: {{ tattoo.tattoos_where }}</p>
-		<a href =''>delete</a>
+		<a style='color:red' href ='/account/file/{{ file.id }}/tattoo/{{ tattoo.id }}/delete'>delete</a>
 		{% endfor %}
 	</div>
 
@@ -97,6 +97,7 @@
 
 	
 	<h3 align="center">Abilities</h3>
+
 	<p>{{ file.character_first_name }} {{ file.character_last_name }} has {{ file1.skills_number }} skills </p>
 	<span align="right" style='color:darkblue'><a href='/account/file/{{ file.id }}/skill_form'>Add skills</a></span>
 
@@ -104,7 +105,7 @@
 		{% for skill in skills %}
 		<h4>{{ skill.skills_what }}</h4>
 		<span>How they use the skill: {{ skill.skills_used }}</span>
-		<a href =''>delete</a>
+		<a style='color:red' href ='/account/file/{{ file.id }}/skill/{{ skill.id }}/delete'>delete</a>
 		{% endfor %}
 	</div>
 
@@ -121,13 +122,13 @@
 		<p>Flaws: {{ magic.flaws }}</p>
 		<p>Limitations: {{ magic.limitations }}</p>
 		<p>Price for using ability:</p>
-		<a href =''>delete</a>
+		<a style='color:red' href ='/account/file/{{ file.id }}/magical_ability/{{ magic.id }}/delete'>delete</a>
 		{% endfor %}
 	</div>
 
 	<p>{{ file.character_first_name }} {{ file.character_last_name }} needs to improve on ..........{{ file1.improvements }}...........</p>
 
-	<h3>Relationships</h3>
+	<h3>Relationships</h3><span align="right" style='color:darkblue'><a href='/account/file/{{ file.id }}/relationship_form'>Add Relationship</a></span>
 
 	<div align="center">
 		{% for relationship in relationships %}
@@ -136,7 +137,7 @@
 		<p>Age:  {{ relationship.age }}</p>
 		<p>Length of relationship:  {{ relationship.length }}</p>
 		<p>Identifies As:  {{ relationship.gender }}</p>
-		<a href =''>delete</a>
+		<a style='color:red' href ='/account/file/{{ file.id }}/relationship/{{ relationship.id }}/delete'>delete</a>
 		{% endfor %}
 	</div>
 
