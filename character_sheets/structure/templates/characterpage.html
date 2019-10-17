@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 {% block page_content %}
 <div>
-	{%for file in file %}
+	{% for file in file %}
 	<h2 align="center">{{ file.character_first_name }} {{ file.character_last_name }}</h2>
 	<p align='center'>File: {{ file.file_name }} <span align="center" style='color:darkblue'><a>Edit File</a></span></p>
 	<p align='center'>{{ file.character_description }}</p>
@@ -20,9 +20,28 @@
 	<h3 align="center">Appearence</h3>
 	<p>Eye colour: {{ file1.eye_colour }}</p>
 	<p>{{ file.character_first_name }} {{ file.character_last_name }} has scars (True or False):  ............{{ file1.scars }}............ </p>
+	
 	<span style='color:darkblue'><a href='/account/file/{{ file.id }}/scars_form'>Add scars</a></span>
+	
+	<div align="center">
+		{% for scar in scars %}
+		<h4>{{ scar.scars_what }}</h4>
+		<p>Located: {{ scar.scars_where }}</p>
+		<p>History: {{ scar.scars_why }}</p>
+		<a href =''>delete</a>
+		{% endfor %}
+	</div>
+
 	<p>{{ file.character_first_name }} {{ file.character_last_name }} has tattoos (True or False):  .........{{ file1.tattoos }}..........</p>
 	<span style='color:darkblue'><a href='/account/file/{{ file.id }}/tattoos_form'>Add tattoos</a></span>
+
+	<div align="center">
+		{% for tattoo in tattoos %}
+		<h4>{{ tattoo.tattoos_what }}</h4>
+		<p>Located: {{ tattoo.tattoos_where }}</p>
+		<a href =''>delete</a>
+		{% endfor %}
+	</div>
 
 
 
@@ -56,23 +75,70 @@
 	<p>You the Author know where {{ file.character_first_name }} {{ file.character_last_name }} lives and what the address is (True or False): .........{{ file1.address }}..........</p>	
 	<span align="right" style='color:darkblue'><a href='/account/file/{{ file.id }}/address_form'>Add Address</a></span>
 
+	<div align="center">
+		<p>{{ address.address_1 }}</p>
+		<p>{{ address.address_2 }}</p>
+		<p>{{ address.town }}</p>
+		<p>{{ address.county }}</p>
+		<p>{{ address.country }}</p>
+		<p>{{ address.postcode_zipcode }}</p>
+		<a href =''>edit</a>
+	</div>
+
 	<p> {{ file.character_first_name }} {{ file.character_last_name }} identifies as .............{{ file1.gender }}..............</p>
 	<p>{{ file.character_first_name }} {{ file.character_last_name }}'s birthday is .........{{ file1.birthday }}.........</p>
 	<p>Does {{ file.character_first_name }} {{ file.character_last_name }} know thier mother? .........{{ file1.mother }}........</p>
 	<p>Does {{ file.character_first_name }} {{ file.character_last_name }} know thier father? ..........{{ file1.father }}.........</p>
 	<p>Do you have any relationship details you'd like to add for {{ file.character_first_name }} {{ file.character_last_name }}? ........{{ file1.relationships }}........</p>
+	<span align="right" style='color:darkblue'><a href='/account/file/{{ file.id }}/relationship_form'>Add Relationship</a></span>
+
+
 
 
 	
 	<h3 align="center">Abilities</h3>
 	<p>{{ file.character_first_name }} {{ file.character_last_name }} has {{ file1.skills_number }} skills </p>
 	<span align="right" style='color:darkblue'><a href='/account/file/{{ file.id }}/skill_form'>Add skills</a></span>
+
+	<div align="center">
+		{% for skill in skills %}
+		<h4>{{ skill.skills_what }}</h4>
+		<span>How they use the skill: {{ skill.skills_used }}</span>
+		<a href =''>delete</a>
+		{% endfor %}
+	</div>
+
+
 	<p>{{ file.character_first_name }} {{ file.character_last_name }} has magical abilities (True or False):  ............{{ file1.magical_abilities }}............
 	</p>
 	<span align="right" style='color:darkblue'><a href='/account/file/{{ file.id }}/magical_abilities_form'>Add Magical Ability</a></span>
 	
+	<div align="center">
+		{% for magic in magical %}
+		<h4>Ability: {{ magic.MA_name }}</h4>
+		<p>How the ability is used: </p>
+		<p>{{ magic.MA_used }}</p>
+		<p>Flaws: {{ magic.flaws }}</p>
+		<p>Limitations: {{ magic.limitations }}</p>
+		<p>Price for using ability:</p>
+		<a href =''>delete</a>
+		{% endfor %}
+	</div>
+
 	<p>{{ file.character_first_name }} {{ file.character_last_name }} needs to improve on ..........{{ file1.improvements }}...........</p>
 
+	<h3>Relationships</h3>
+
+	<div align="center">
+		{% for relationship in relationships %}
+		<h4>{{ relationship.first_name }} {{ relationship.last_name}} </h4>
+		<p>Type:  {{ relationship.relationship_type }}</p>
+		<p>Age:  {{ relationship.age }}</p>
+		<p>Length of relationship:  {{ relationship.length }}</p>
+		<p>Identifies As:  {{ relationship.gender }}</p>
+		<a href =''>delete</a>
+		{% endfor %}
+	</div>
 
 	{% endfor %}
 </div>

@@ -362,7 +362,7 @@ class AddressForm(FlaskForm):
     address_1 = StringField('Address Line 1: ')
     address_2 = StringField('Address Line 2: ')
     town = StringField('Town: ')
-    county_state =StringField('County/State: ')
+    county =StringField('County/State: ')
     country= StringField('Country: ')
     postcode_zipcode = StringField('Post Code/Zip Code:')
     submit = SubmitField('Submit')

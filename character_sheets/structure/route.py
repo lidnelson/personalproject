@@ -155,7 +155,13 @@ def characterform():
 def characterpage(file_id):
 	fileData = Files.query.filter_by(id=file_id)
 	characterData = CharacterFile.query.filter_by(file_id=file_id).first()
-	return render_template('characterpage.html', title="Charater page", file1=characterData, file=fileData)
+	scars= Scars.query.filter_by(file_id=file_id).all()
+	tattoos= Tattoos.query.filter_by(file_id=file_id).all()
+	address= CharacterAddress.query.filter_by(file_id=file_id).first()
+	skill = Skills.query.filter_by(file_id=file_id).all()
+	magic = Magical.query.filter_by(file_id=file_id).all()
+	relationship= Relationships.query.filter_by(file_id=file_id).all()
+	return render_template('characterpage.html', title="Charater page", scars=scars, tattoos=tattoos, address=address, skill=skill, magic=magic, relationship=relationship,file1=characterData, file=fileData)
 
 @app.route('/account/delete', methods=['GET','POST'])
 @login_required
@@ -204,10 +210,12 @@ def scars(file_id):
 			scars_where =  form.scars_where.data,
 			scars_why = form.scars_why.data
 			)
+		temp = CharacterFile.query.filter_by(id=file_id).first()
+		temp.scars=1
 		db.session.add(ScarsData)
 		db.session.commit()
 		if form.submit_yes.data:
-			return redirect(url_for('scars'))
+			return redirect(url_for('scars', file_id=file_id))
 		if form.submit_no.data:
 			return redirect(url_for('account'))
 	return render_template('scars.html', title='Scars form', form=form)
@@ -222,10 +230,12 @@ def tattoos(file_id):
 			tattoos_what = form.tattoos_what.data,
 			tattoos_where =  form.tattoos_where.data
 			)
+		temp = CharacterFile.query.filter_by(id=file_id).first()
+		temp.tattoos=1
 		db.session.add(TattooData)
 		db.session.commit()
 		if form.submit_yes.data:
-			return redirect(url_for('scars'))
+			return redirect(url_for('tattoos'))
 		if form.submit_no.data:
 			return redirect(url_for('account'))
 	return render_template('tattoos.html', title='Tattoos form', form=form)
