@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+{% block page_content %}
+	<h2>Create a character sheet</h2>
+	<div class="form">
+		<form method='POST', action="">
+			{{ form.hidden_tag() }}
+			<div class="form-group">
+				{{ form.file_name.label }}
+				<p style='color:grey'>{{ file.file_name }}</p>
+				<p>{{ form.file_name }}</p>
+				{% if error in form.file_name.errors %}
+					<div class="error">
+						{% for error in form.file_name.errors %}
+							<span style='color:red'>{{ error }}</span>
+						{% endfor %}
+					</div>
+				{% endif %}
+			</div><br>
+			<div class="form-group">
+				{{ form.project.label }}
+				<p style='color:grey'>{{ file.project }}</p>
+				<p>{{ form.project }}</p>
+				{% if error in form.project.errors %}
+					<div class="error">
+						{% for error in form.project.errors %}
+							<span style='color:red'>{{ error }}</span>
+						{% endfor %}
+					</div>
+				{% endif %}
+			</div><br>
+			<div class="form-group">
+				{{ form.character_first_name.label }}
+				<p style='color:grey'>{{ file.character_first_name }}</p>
+				<p>{{ form.character_first_name }}</p>
+				{% if error in form.character_first_name.errors %}
+					<div class="error">
+						{% for error in form.character_first_name.errors %}
+							<span style='color:red'>{{ error }}</span>
+						{% endfor %}
+					</div>
+				{% endif %}
+			</div><br>
+			<div class="form-group">
+				{{ form.character_last_name.label }}
+				<p style='color:grey'>{{ file.character_last_name }}</p>
+				<p>{{ form.character_last_name }}</p>
+				{% if error in form.character_last_name.errors %}
+					<div class="error">
+						{% for error in form.character_last_name.errors %}
+							<span style='color:red'>{{ error }}</span>
+						{% endfor %}
+					</div>
+				{% endif %}
+			</div><br>
+			<div class="form-group">
+				{{ form.character_description.label }}
+				<p style='color:grey'>{{ file.character_description }}</p>
+				<p>{{ form.character_description }}</p>
+				{% if error in form.character_description.errors %}
+					<div class="error">
+						{% for error in form.character_description.errors %}
+							<span style='color:red'>{{ error }}</span>
+						{% endfor %}
+					</div>
+				{% endif %}
+			</div><br>
+			<div class="form-group">
+				{{ form.submit }}
+			</div>
+		</form>
+	</div>
+{% endblock %}

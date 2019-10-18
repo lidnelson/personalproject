@@ -3,15 +3,12 @@
 
 <div class="form">
 	<form method='POST', action="">
-		
-
 		<h3>Appearence</h3>
-		
-
 		{{ form.hidden_tag() }}
 		<div class="form-group">
 			{{ form.eye_colour.label }}
-			{{ form.eye_colour }}
+			<p style='color:grey'>{{ file.eye_colour }}</p>
+			<p>{{ form.eye_colour }}</p>
 			{% if error in form.eye_colour.errors %}
 				<div class="error">
 					{% for error in form.eye_colour.errors %}
@@ -19,23 +16,13 @@
 					{% endfor %}
 				</div>
 			{% endif %}
-		</div><br>
-		<div class="form-group">
-			{{ form.scars.label }}
-			{{ form.scars }}
-		</div><br>
-		<div class="form-group">
-			{{ form.tattoos.label }}
-			{{ form.tattoos }}
-		</div><br>
-		
 
 		<h3>Personality</h3>
-	    
 
 	    <div class="form-group">
-	     	{{ form.pet_peeves.label }}
-	      	{{ form.pet_peeves }}
+	      	{{ form.pet_peeves.label }}
+	      	<p style='color:grey'> Current answer: {{ file.pet_peeves }}</p>
+	      	<p>{{ form.pet_peeves }}</p>
 	      	{% if error in form.pet_peeves.errors %}
 				<div class="error">
 					{% for error in form.pet_peeves.errors %}
@@ -46,10 +33,11 @@
 	    </div><br>
 	    <div class="form-group">
 	      	{{ form.hobbies.label }}
-	      	{{ form.hobbies }}
-	      	{% if error in form.hobbies.errors %}
+	      	<p style='color:grey'> Current answer: {{ file.hobbies }}</p>
+	      	<p>{{ form.hobbies }}</p>
+	      	{% if error in form.pet_peeves.errors %}
 				<div class="error">
-					{% for error in form.hobbies.errors %}
+					{% for error in form.pet_peeves.errors %}
 						<span style='color:red'>{{ error }}</span>
 					{% endfor %}
 				</div>
@@ -66,14 +54,22 @@
 	      	<p style='color:#FFD200'>Chaotic Neutral - I want my freedom, and i don't care what i have to do to keep it </p>
 	      	<p style='color:lightgrey'>Lawful Evil - To impede the protagonists (in whatever evil way) is my primary goal, but I follow my own code of morals even when it's inconvenient</p>
 	      	<p style='color:blue'>Neutral Evil - To impede the protagonist (in whatever evil way) is my primary goal, and while I'll do what it takes to achieve it, I also won't go out of my way to do unnecessary damage</p>
-	      	<p style='color:red'>Chaotic Evil - i relish in destruction and want to do as much damage as possible while i try to achievemy primary goal</p> 
+	      	<p style='color:red'>Chaotic Evil - i relish in destruction and want to do as much damage as possible while i try to achievemy primary goal</p>
 	      	{{ form.alignment.label }}
-	      	{{ form.alignment }}
-
+	      	<p style='color:grey'> Current answer: {{ file.alignment }}</p>
+	      	<p>{{ form.alignment }}</p>
+	      	{% if error in form.alignment.errors %}
+				<div class="error">
+					{% for error in form.alignement.errors %}
+						<span style='color:red'>{{ error }}</span>
+					{% endfor %}
+				</div>
+			{% endif %}
 	    </div><br>
 	    <div class="form-group">
 	      	{{ form.accent.label }}
-	      	{{ form.accent }}
+	      	<p style='color:grey'> Current answer: {{ file.accent }}</p>
+	      	<p>{{ form.accent }}</p>
 	      	{% if error in form.accent.errors %}
 				<div class="error">
 					{% for error in form.accent.errors %}
@@ -83,8 +79,9 @@
 			{% endif %}
 	    </div><br>
 	    <div class="form-group">
-	     	{{ form.passionate.label }}
-	      	{{ form.passionate }}
+	      	{{ form.passionate.label }}
+	      	<p style='color:grey'> Current answer: {{ file.passionate }}</p>
+	      	<p>{{ form.passionate }}</p>
 	      	{% if error in form.passionate.errors %}
 				<div class="error">
 					{% for error in form.passionate.errors %}
@@ -95,11 +92,20 @@
 	    </div><br>
 	    <div class="form-group">
 	      	{{ form.earlybird_nightowl.label }}
-	      	{{ form.earlybird_nightowl }}
+	      	<p style='color:grey'> Current answer: {{ file.earlybird_nightowl }}</p>
+	      	<p>{{ form.earlybird_nightowl }}</p>
+	      	{% if error in form.earlybird_nightowl.errors %}
+				<div class="error">
+					{% for error in form.earlybird_nightowl.errors %}
+						<span style='color:red'>{{ error }}</span>
+					{% endfor %}
+				</div>
+			{% endif %}
 	    </div><br>
 	    <div class="form-group">
 	      	{{ form.favourite_meal.label }}
-	      	{{ form.favourite_meal }}
+	      	<p style='color:grey'> Current answer: {{ file.favourite_meal }}</p>
+	      	<p>{{ form.favourite_meal }}</p>
 	      	{% if error in form.favourite_meal.errors %}
 				<div class="error">
 					{% for error in form.favourite_meal.errors %}
@@ -110,7 +116,8 @@
 	    </div><br>
 	    <div class="form-group">
 	      	{{ form.goals.label }}
-	      	{{ form.goals }}
+	      	<p style='color:grey'> Current answer: {{ file.goals }}</p>
+	      	<p>{{ form.goals }}</p>
 	      	{% if error in form.goals.errors %}
 				<div class="error">
 					{% for error in form.goals.errors %}
@@ -121,7 +128,8 @@
 	    </div><br>
 	    <div class="form-group">
 	      	{{ form.music_genre.label }}
-	      	{{ form.music_genre }}
+	      	<p style='color:grey'> Current answer: {{ file.music_genre }}</p>
+	      	<p>{{ form.music_genre }}</p>
 	      	{% if error in form.music_genre.errors %}
 				<div class="error">
 					{% for error in form.music_genre.errors %}
@@ -132,15 +140,18 @@
 	    </div><br>
 	    <div class="form-group">
 	      	{{ form.cat_person.label }}
-	      	{{ form.cat_person }}
+	      	<p style='color:grey'> Current answer: {{ file.cat_person }}</p>
+	      	<p>{{ form.cat_person }}</p>
 	    </div><br>
 	    <div class="form-group">
 	      	{{ form.dog_person.label }}
-	      	{{ form.dog_person }}
+	      	<p style='color:grey'> Current answer: {{ file.dog_person }}</p>
+	      	<p>{{ form.dog_person }}</p>
 	    </div><br>
 	    <div class="form-group">
 	      	{{ form.romantic_relationship_ideals.label }}
-	      	{{ form.romantic_relationship_ideals }}
+	      	<p style='color:grey'> Current answer: {{ file.romantic_relationship_ideals }}</p>
+	      	<p>{{ form.romantic_relationship_ideals }}</p>
 	      	{% if error in form.romantic_relationship_ideals.errors %}
 				<div class="error">
 					{% for error in form.romantic_relationship_ideals.errors %}
@@ -151,23 +162,28 @@
 	    </div><br>
 	    <div class="form-group">
 	      	{{ form.partial_birthday_celebration.label }}
-	      	{{ form.partial_birthday_celebration }}
+	      	<p style='color:grey'> Current answer: {{ file.partial_birthday_celebration }}</p>
+	      	<p>{{ form.partial_birthday_celebration }}</p>
 	    </div><br>
 	    <div class="form-group">
 	      	{{ form.easy_appologiser.label }}
-	      	{{ form.easy_appologiser }}      
+	      	<p style='color:grey'> Current answer: {{ file.easy_appologiser }}</p>
+	      	<p>{{ form.easy_appologiser }}</p>      
 	    </div><br>
 	    <div class="form-group">
 	      	{{ form.bullied.label }}
-	      	{{ form.bullied }}
+	      	<p style='color:grey'> Current answer: {{ file.bullied }}</p>
+	      	<p>{{ form.bullied }}</p>
 	    </div><br>
 	    <div class="form-group">
 	      	{{ form.smarts.label }}
-	      	{{ form.smarts }}
+	      	<p style='color:grey'> Current answer: {{ file.smarts }}</p>
+	      	<p>{{ form.smarts }}</p>
 	    </div><br>
 	    <div class="form-group">
 	      	{{ form.country.label }}
-	      	{{ form.country }}
+	      	<p style='color:grey'> Current answer: {{ file.country }}</p>
+	      	<p>{{ form.country }}</p>
 	      	{% if error in form.country.errors %}
 				<div class="error">
 					{% for error in form.country.errors %}
@@ -178,11 +194,13 @@
 	    </div><br>
 	    <div class="form-group">
 	      	{{ form.book_worm.label }}
-	      	{{ form.book_worm }}
+	      	<p style='color:grey'> Current answer: {{ file.book_worm }}</p>
+	      	<p>{{ form.book_worm }}</p>
 	    </div><br>
 	    <div class="form-group">
 	      	{{ form.fears.label }}
-	      	{{ form.fears }}
+	      	<p style='color:grey'> Current answer: {{ file.fears }}</p>
+	      	<p>{{ form.fears }}</p>
 	      	{% if error in form.fears.errors %}
 				<div class="error">
 					{% for error in form.fears.errors %}
@@ -194,30 +212,34 @@
 
 
 		<h3>Details</h3>
-		
+	
 
 		<div class="form-group">
 			{{ form.address.label }}
-			{{ form.address }}
+			<p style='color:grey'> Current answer: {{ file.address }}</p>
+			<p>{{ form.address }}</p>
 		</div><br>
 		<div class="form-group">
 			{{ form.gender.label }}
-			{{ form.gender }}
+			<p style='color:grey'> Current answer: {{ file.gender }}</p>
+			<p>{{ form.gender }}</p>
 		</div><br>
 		<div class="form-group">
 			{{ form.birthday.label }}
-			<span><input type='date' name='birthday'></span>
-			{% if error in form.birthday.errors %}
+			<p style='color:grey'> Current answer: {{ file.birthday }}</p>
+			<p><input type="date" name="birthday"></p>
+				{% if form.birthday.errors %}
 				<div class="error">
-					{% for error in form.birthday.errors %}
-						<span style='color:red'>{{ error }}</span>
+					{% for error in errors %}
+					<span style='color:red'>{{ error }}</span>
 					{% endfor %}
 				</div>
-			{% endif %}
+				{% endif %}
 		</div><br>
 		<div class="form-group">
 			{{ form.health_issues.label }}
-			{{ form.health_issues }}
+			<p style='color:grey'> Current answer: {{ file.health_issues }}</p>
+			<p>{{ form.health_issues }}</p>
 			{% if error in form.health_issues.errors %}
 				<div class="error">
 					{% for error in form.health_issues.errors %}
@@ -228,24 +250,28 @@
 		</div><br>
 		<div class="form-group">
 			{{ form.mother.label }}
-			{{ form.mother }}
+			<p style='color:grey'> Current answer: {{ file.mother }}</p>
+			<p>{{ form.mother }}</p>
 		</div><br>
 		<div class="form-group">
 			{{ form.father.label }}
-			{{ form.father }}
+			<p style='color:grey'> Current answer: {{ file.father }}</p>
+			<p>{{ form.father }}</p>
 		</div><br>
 		<div class="form-group">
 			{{ form.relationships.label }}
-			{{ form.relationships }}
+			<p style='color:grey'> Current answer: {{ file.relationships }}</p>
+			<p>{{ form.relationships }}</p>
 		</div><br>
-		
+
 
 		<h3>Abilities</h3>
 		
 
 		<div class="form-group">
 			{{ form.skills_number.label }}
-			{{ form.skills_number }}
+			<p style='color:grey'> Current answer: {{ file.skills_number }}</p>
+			<p>{{ form.skills_number }}</p>
 			{% if error in form.skills_number.errors %}
 				<div class="error">
 					{% for error in form.skills_number.errors %}
@@ -256,11 +282,13 @@
 		</div><br>
 		<div class="form-group">
 			{{ form.magical_abilities.label }}
-			{{ form.magical_abilities }}
+			<p style='color:grey'> Current answer: {{ file.magical_abilities }}</p>
+			<p>{{ form.magical_abilities }}</p>
 		</div><br>
 		<div class="form-group">
 			{{ form.improvements.label }}
-			{{ form.improvements }}
+			<p style='color:grey'> Current answer: {{ file.improvements }}</p>
+			<p>{{ form.improvements }}</p>
 			{% if error in form.improvements.errors %}
 				<div class="error">
 					{% for error in form.improvements.errors %}

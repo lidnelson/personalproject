@@ -100,14 +100,15 @@ class CharacterFile(db.Model):
 			'Fears: ', self.fears, '\r\n',
 			'I know the characters address: ', self.address, '\r\n',
 			'Gender: ', str(self.gender), '\r\n',
-			'Characters Birthday: ', self.birthday, '\r\n',
+			'Characters Birthday: ', str(self.birthday), '\r\n',
 			'Health Issues: ', self.health_issues, '\r\n',
 			'Knows Mother: ', str(self.mother), '\r\n',
 			'Knows father: ', str(self.father), '\r\n',
 			"There are other relationships i'd like to input: ", str(self.relationships), '\r\n',
 			"Number of skills: ", self.skills_number, '\r\n',
 			"Magical abilities: ", self.magical_abilities,'\r\n',
-			"Skill Imporvements: ", self.improvements])
+			"Skill Imporvements: ", self.improvements
+			])
 
 class Scars(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
@@ -216,3 +217,9 @@ class Magical(db.Model):
 			"The limitations: ", self.limitations, '\r\n',
 			"Paid Price: ", self.price
 			])
+
+class Alignment(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	name = db.Column(db.String, nullable=False, unique=True)
+	description=db.Column(db.String(10000), nullable=False, unique=True)
+	colour= db.Column(db.String, nullable=False, unique=True)

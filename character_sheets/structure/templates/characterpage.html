@@ -6,7 +6,7 @@
 	<p align='center'>File: {{ file.file_name }} <span align="center" style='color:darkblue'><a href='/account/file/{{ file.id }}/edit_file_name'>Edit File</a></span></p>
 	<p align='center'>{{ file.character_description }}</p>
 
-	{% endfor %}
+	
 </div>
 
 <div align="center">
@@ -14,8 +14,7 @@
 	<span style='color:darkblue'><a href= '/account/file/{{ file.id }}/edit_character'>Edit Character</a></span>
 </div>
 <div>
-	{% for file in file %}
-
+	
 
 	<h3 align="center">Appearence</h3>
 	<p>Eye colour: {{ file1.eye_colour }}</p>
@@ -48,13 +47,14 @@
 	<h3 align="center">Personality</h3>
 	<p>Pet-peeves : .......{{ file1.pet_peeves }}.......</p>
 	<p>Hobbies : ......{{ file1.hobbies }}.......</p>
-	<p>Alignment : .......{{ file.alignment }}.......</p>
+	<p>Alignment : .......{{ file1.alignment }}.......</p>
+	<p style='color:{{ a.colour }}'>{{ file1.alignment }} - {{ a.description }}</p>
 	<p>Accent : ......{{ file1.accent }}......</p>
 	<p>{{ file.character_first_name }} {{ file.character_last_name }} is passionate about ....{{ file1.passionate }}....</p>
 	<p>{{ file.character_first_name }} {{ file.character_last_name }} is a(n) ... {{ file1.earlybird_nightowl }}</p>
-	<p>{{ file.character_first_name }} {{ file.character_last_name }} favourite meal is ... {{ file1.favourite_meal }}</p>
-	<p>{{ file.character_first_name }} {{ file.character_last_name }}'s main goal is to ... {{ file1.goals }}</p>
-	<p>In thier own time {{ file.character_first_name }} {{ file.character_last_name }} likes to listen to ... {{ file1.music_genre }} ... music </p>
+	<p>{{ file.character_first_name }} {{ file.character_last_name }} favourite meal is .......{{ file1.favourite_meal }}.......</p>
+	<p>{{ file.character_first_name }} {{ file.character_last_name }}'s main goal is to ........{{ file1.goals }}........</p>
+	<p>In thier own time {{ file.character_first_name }} {{ file.character_last_name }} likes to listen to .......{{ file1.music_genre }}....... music </p>
 	<p>{{ file.character_first_name }} {{ file.character_last_name }} is a cat person (True or False):	..........{{ file1.cat_person }}...........
 	</p>
 	<p>{{ file.character_first_name }} {{ file.character_last_name }} is a dog person (True or False):..........{{ file1.dog_person }}.........
@@ -82,7 +82,7 @@
 		<p>{{ address.county }}</p>
 		<p>{{ address.country }}</p>
 		<p>{{ address.postcode_zipcode }}</p>
-		<a href =''>edit</a>
+		<a style='color:darkblue' href ='/account/file/{{ file.id }}/address/edit'>edit</a>
 	</div>
 
 	<p> {{ file.character_first_name }} {{ file.character_last_name }} identifies as .............{{ file1.gender }}..............</p>

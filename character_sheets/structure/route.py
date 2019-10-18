@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, request
 from flask_login import login_user, current_user, logout_user, login_required
 from structure import app, db, bcrypt, login_manager, LoginManager
-from structure.model import Users, Files, CharacterFile, Scars, Tattoos, CharacterAddress, Relationships, Skills, Magical 
+from structure.model import Alignment, Users, Files, CharacterFile, Scars, Tattoos, CharacterAddress, Relationships, Skills, Magical 
 from structure.form import ScarsForm, TattoosForm, AddressForm, RegistrationForm, LoginForm, UpdateAccountForm, FilesForm, CharacterForm,  MagicalForm, DeleteForm, SkillsForm, RelationshipForm
 
 tempFormData = ""
@@ -161,7 +161,8 @@ def characterpage(file_id):
 	skill = Skills.query.filter_by(file_id=file_id).all()
 	magic = Magical.query.filter_by(file_id=file_id).all()
 	relationship= Relationships.query.filter_by(file_id=file_id).all()
-	return render_template('characterpage.html', title="Charater page", scars=scars, tattoos=tattoos, address=address, skills=skill, magical=magic, relationships=relationship,file1=characterData, file=fileData)
+	alignment = Alignment.query.filter_by(name=characterData.alignment).first()
+	return render_template('characterpage.html', title="Charater page",a=alignment, scars=scars, tattoos=tattoos, address=address, skills=skill, magical=magic, relationships=relationship,file1=characterData, file=fileData)
 
 @app.route('/account/delete', methods=['GET','POST'])
 @login_required
@@ -191,20 +192,76 @@ def deletecharacter(file_id):
 		return redirect(url_for('account'))	
 	return render_template('deletefile.html',title='Delete File Page', form=form)
 
-@app.route('/account/file/<int(min=1):file_id>/edit_file_name')
+@app.route('/account/file/<int(min=1):file_id>/edit_file_name', methods=['GET', 'POST'])
 @login_required
 def editfile(file_id):
 	form = FilesForm()
 	file=Files.query.filter_by(id=file_id).first()
-	return render_template('createfile.html',title='Edit file', form=form)
+	if form.validate_on_submit():
+		file.file_name=form.file_name.data
+		file.project = form.project.data
+		file.character_first_name=form.character_first_name.data
+		file.character_last_name= form.character_last_name.data
+		file.character_description = form.character_description.data
+		db.session.commit()
+		return redirect(url_for('characterpage', file_id=file_id))
+	return render_template('editfile.html',title='Edit file', form=form, file=file)
 
-@app.route('/account/file/<int(min=1):file_id>/edit_character')
+@app.route('/account/file/<int(min=1):file_id>/edit_character', methods=['GET', 'POST'])
 @login_required
 def editcharacter(file_id):
 	form = CharacterForm()
 	Chara = CharacterFile.query.filter_by(file_id=file_id).first()
-	return render_template('characterform.html', title='Edit Character', form=form)
+	if form.submit.data:
+		Chara.eye_colour = form.eye_colour.data
+		Chara.pet_peeves = form.pet_peeves.data
+		Chara.hobbies = form.hobbies.data
+		Chara.alignment = form.alignment.data
+		Chara.accent = form.accent.data
+		Chara.passionate = form.passionate.data
+		Chara.earlybird_nightowl = form.earlybird_nightowl.data
+		Chara.favourite_meal = form.favourite_meal.data
+		Chara.goals = form.goals.data
+		Chara.music_genre = form.music_genre.data
+		Chara.cat_person = form.cat_person.data
+		Chara.dog_person = form.dog_person.data
+		Chara.romantic_relationship_ideals = form.romantic_relationship_ideals.data
+		Chara.partial_birthday_celebration = form.partial_birthday_celebration.data
+		Chara.easy_appologiser = form.easy_appologiser.data
+		Chara.bullied = form.bullied.data
+		Chara.smarts = form.smarts.data
+		Chara.country = form.country.data
+		Chara.book_worm = form.book_worm.data
+		Chara.fears = form.fears.data
+		Chara.address = form.address.data
+		Chara.gender = form.gender.data
+		Chara.birthday = form.birthday.data
+		Chara.health_issues = form.health_issues.data
+		Chara.mother = form.mother.data
+		Chara.father = form.father.data
+		Chara.relationships = form.relationships.data
+		Chara.skills_number = form.skills_number.data
+		Chara.magical_abilities = form.magical_abilities.data
+		Chara.improvements = form.improvements.data
+		db.session.commit()
+		return redirect(url_for('characterpage', file_id=file_id))
+	return render_template('editcharacter.html', title='Edit Character', form=form, file=Chara)
 
+@app.route('/account/file/<int(min=1):file_id>/address/edit', methods=['GET','POST'])
+@login_required
+def editaddress(file_id):
+	form =  AddressForm()
+	file = CharacterAddress.query.filter_by(file_id=file_id).first()
+	if form.validate_on_submit():
+		file.address_1 = form.address_1.data
+		file.address_2 =  form.address_2.data
+		file.town = form.town.data
+		file.county = form.county.data
+		file.country = form.country.data
+		file.postcode_zipcode = form.postcode_zipcode.data
+		db.session.commit()
+		return redirect(url_for('characterpage', file_id=file_id))
+	return render_template('address.html', title='Address form', form=form)
 
 @app.route('/account/file/<int(min=1):file_id>/scar/<int(min=1):scars_id>/delete', methods=['GET','POST'])
 @login_required
@@ -239,6 +296,11 @@ def deleteskill(file_id, skills_id):
 	if form.yes.data:
 		skillData = Skills.query.filter_by(id=skills_id).first()
 		db.session.delete(skillData)
+		db.session.commit()
+		
+		temp = Skills.query.filter_by(file_id=file_id).count()
+		chara= CharacterFile.query.filter_by(id=file_id).first()
+		chara.skills_number = int(temp)
 		db.session.commit()
 		return redirect (url_for('characterpage', file_id=file_id))
 	return render_template('deleteskill.html', title='Delete skill', form=form)
@@ -322,6 +384,8 @@ def address(file_id):
 			country = form.country.data,
 			postcode_zipcode = form.postcode_zipcode.data
 			)
+		temp = CharacterFile.query.filter_by(id=file_id).first()
+		temp.address=1
 		db.session.add(AddressData)
 		db.session.commit()
 		return redirect(url_for('characterpage', file_id=file_id))
@@ -341,6 +405,8 @@ def relationships(file_id):
 			length = form.length.data,
 			gender = form.gender.data
 			)
+		temp = CharacterFile.query.filter_by(id=file_id).first()
+		temp.relationships=1
 		db.session.add(Data)
 		db.session.commit()
 		if form.submit_yes.data:
@@ -362,8 +428,16 @@ def skill(file_id):
 		db.session.add(Data)
 		db.session.commit()
 		if form.submit_yes.data:
+			temp = Skills.query.filter_by(file_id=file_id).count()
+			chara= CharacterFile.query.filter_by(id=file_id).first()
+			chara.skills_number = int(temp)
+			db.session.commit()
 			return redirect(url_for('skill', file_id=file_id))
 		if form.submit_no.data:
+			temp = Skills.query.filter_by(file_id=file_id).count()
+			chara= CharacterFile.query.filter_by(id=file_id).first()
+			chara.skills_number = temp
+			db.session.commit()
 			return redirect(url_for('characterpage', file_id=file_id))
 	return render_template('skill.html', title='Skills form', form=form)
 
@@ -380,6 +454,8 @@ def magical(file_id):
 			limitations = form.limitations.data,
 			price = form.price.data
 			)
+		temp = CharacterFile.query.filter_by(id=file_id).first()
+		temp.magical_abilities=1
 		db.session.add(Data)
 		db.session.commit()
 		if form.submit_yes.data:

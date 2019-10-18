@@ -115,7 +115,7 @@ class FilesForm(FlaskForm):
         validators=[
             Length(min=2, max=10000)
         ])
-    submit = SubmitField('Create File')
+    submit = SubmitField('Submit')
 
 
 class CharacterForm(FlaskForm):
@@ -180,15 +180,15 @@ class CharacterForm(FlaskForm):
     hobbies = StringField('What hobbies does your character have?')
     alignment = SelectField('What Alignement is your character?',
         choices=[
-            ('lawful_good','Lawful Good'),
-            ('lawful_neutral','Lawful Neutral'),
-            ('lawful_evil','Lawful Evil'),
-            ('neutral_good','Neutral Good'),
-            ('true_neutral','True Neutral'),
-            ('neutral_evil','Neutral Evil'),
-            ('chaotic_good','Chaotic Good'),
-            ('chaotic_neutral','Chaotic Neutral'),
-            ('chaotic_evil','Chaotic Evil')
+            ('Lawful Good','Lawful Good'),
+            ('Lawful Neutral','Lawful Neutral'),
+            ('Lawful Evil','Lawful Evil'),
+            ('Neutral Good','Neutral Good'),
+            ('True Neutral','True Neutral'),
+            ('Neutral Evil','Neutral Evil'),
+            ('Chaotic Good','Chaotic Good'),
+            ('Chaotic Neutral','Chaotic Neutral'),
+            ('Chaotic Evil','Chaotic Evil')
         ])
     accent = StringField('What accent does your character have?')
     #introvert_extrovert_scale #scale
@@ -236,8 +236,8 @@ class CharacterForm(FlaskForm):
         #     bully_effect = StringField('How does it affect your character and the way they act?')
     smarts = SelectField('Is your character have street smart or book smart?',
         choices=[
-            ('street_smart','Street Smart'),
-            ('book_smart','Book Smart')
+            ('Street Smart','Street Smart'),
+            ('Book Smart','Book Smart')
         ])
     country = StringField('What country is your character from?')
     book_worm= BooleanField('Book worm')
@@ -247,7 +247,7 @@ class CharacterForm(FlaskForm):
                 choices=[
                     ('male','Male'),
                     ('female','Female'),
-                    ('gender_fluid','Gender Fluid')
+                    ('gender fluid','Gender Fluid')
                 ])
     birthday = StringField('Characters Birthday: ')
     health_issues = StringField('Does your character have any health issues?')
