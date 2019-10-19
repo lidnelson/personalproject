@@ -2,7 +2,7 @@ from flask import render_template, redirect, url_for, request
 from flask_login import login_user, current_user, logout_user, login_required
 from structure import app, db, bcrypt, login_manager, LoginManager
 from structure.model import Alignment, Users, Files, CharacterFile, Scars, Tattoos, CharacterAddress, Relationships, Skills, Magical 
-from structure.form import ScarsForm, TattoosForm, AddressForm, RegistrationForm, LoginForm, UpdateAccountForm, FilesForm, CharacterForm,  MagicalForm, DeleteForm, SkillsForm, RelationshipForm
+from structure.form import SearchForm, ScarsForm, TattoosForm, AddressForm, RegistrationForm, LoginForm, UpdateAccountForm, FilesForm, CharacterForm,  MagicalForm, DeleteForm, SkillsForm, RelationshipForm
 
 tempFormData = ""
 
@@ -73,7 +73,20 @@ def updateaccount():
 @login_required
 def account():
 	fileData=Files.query.filter_by(user_id=current_user.id)
-	return render_template('account.html', title = 'Account', file=fileData)
+	form= SearchForm()
+	cycle = []
+	for field in form:
+		if field.type == 'SelectField':
+			field.choices = cycle
+	for file in Files.query.filter_by(user_id=current_user.id).all():
+		cycle.append((file.file_name, file.file_name))
+	form.name_dropdown.choices = cycle
+	if form.validate_on_submit():
+		print(name_dropdown.data)
+		print('//////////////////////////')
+		temp=Files.query.filter_by(file_name=str(form.name_dropdown.data)).first()
+		return redirect(url_for('search', file_id=temp.id))
+	return render_template('account.html', title = 'Account', file=fileData, form=form)
 
 @app.route('/account/createfile', methods=['GET','POST'])
 @login_required
@@ -463,6 +476,14 @@ def magical(file_id):
 		if form.submit_no.data:
 			return redirect(url_for('characterpage', file_id=file_id))
 	return render_template('magical.html', title='Magical Abilities form', form=form)
+
+@app.route('/account/file/search/<int(min=1):file_id>')
+@login_required
+def search(file_id):
+	file= Files.query.filter_by(id=file_id)
+	fileData=Files.query.filter_by(file_name=file.file_name)
+	return render_template('search.html', title='Search')
+
 
 @login_manager.user_loader
 def load_user(id):

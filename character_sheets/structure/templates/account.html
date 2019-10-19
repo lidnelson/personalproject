@@ -14,6 +14,13 @@
 {% endblock navbar_content %}
 {% block page_content %}
 <h2 align="center" style='text-decoration: underline'>Your Files</h2>
+
+{{ form.name_dropdown.label }}
+{{ form.name_dropdown }}
+<br>
+{{ form.go }}
+<br>
+
 {% for file in file %}
 	<div>
 		<h4>File: {{ file.file_name }}</h4>

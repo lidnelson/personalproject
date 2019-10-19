@@ -3,7 +3,7 @@ from wtforms.fields import StringField, SubmitField, PasswordField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from flask_login import current_user
 from structure import bcrypt, login_manager
-from structure.model import Users
+from structure.model import Users, Files
 
 
 class RegistrationForm(FlaskForm):
@@ -94,7 +94,7 @@ class FilesForm(FlaskForm):
     file_name = StringField('File Name: ',
 		validators=[
 			DataRequired(),
-			Length(min=2)
+			Length(min=2, max=100)
 		])
     project = StringField('For which project: ',
         validators=[
@@ -403,6 +403,11 @@ class MagicalForm(FlaskForm):
     submit_yes= SubmitField('Yes')
     submit_no = SubmitField('No')
 
+
+class SearchForm(FlaskForm):
+    cycle=[]
+    name_dropdown= SelectField('What file do you want to look at?', choices=cycle)
+    go = SubmitField('Go')
 
 @login_manager.user_loader
 def load_user(id):
