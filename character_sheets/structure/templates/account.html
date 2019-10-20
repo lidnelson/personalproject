@@ -15,11 +15,13 @@
 {% block page_content %}
 <h2 align="center" style='text-decoration: underline'>Your Files</h2>
 
-{{ form.name_dropdown.label }}
-{{ form.name_dropdown }}
-<br>
-{{ form.go }}
-<br>
+{{ form.listed.label }}
+{{ form.listed }}
+
+<span>
+{{ form.go }}	
+</span>
+
 
 {% for file in file %}
 	<div>

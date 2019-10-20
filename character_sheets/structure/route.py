@@ -78,14 +78,15 @@ def account():
 	for field in form:
 		if field.type == 'SelectField':
 			field.choices = cycle
-	for file in Files.query.filter_by(user_id=current_user.id).all():
+	for file in fileData:
 		cycle.append((file.file_name, file.file_name))
-	form.name_dropdown.choices = cycle
-	if form.validate_on_submit():
-		print(name_dropdown.data)
+	form.listed.choices = cycle
+	if form.go.data:
+		print(form.listed.data)
 		print('//////////////////////////')
-		temp=Files.query.filter_by(file_name=str(form.name_dropdown.data)).first()
-		return redirect(url_for('search', file_id=temp.id))
+		temp=Files.query.filter_by(file_name=str(form.listed.data)).first()
+		file_id=temp.id
+		return redirect(url_for('search', file_id=file_id))
 	return render_template('account.html', title = 'Account', file=fileData, form=form)
 
 @app.route('/account/createfile', methods=['GET','POST'])
@@ -184,6 +185,27 @@ def deleteaccount():
 	if form.validate_on_submit():
 		files =Files.query.filter_by(user_id=current_user.id).all()
 		for i in files:
+			scars = Scars.query.filter_by(file_id=i.id)
+			for scar in scars:
+				db.session.delete(scar)
+			tattoos= Tattoos.query.filter_by(file_id=i.id)
+			for tattoo in tattoos:
+				db.session.delete(tattoo)
+			skills= Skills.query.filter_by(file_id=i.id)
+			for skill in skills:
+				db.session.delete(skill)
+			magical= Magical.query.filter_by(file_id=i.id)
+			for magic in magical:
+				db.session.delete(magic)
+			R= Relationships.query.filter_by(file_id=i.id)
+			for j in R:
+				db.session.delete(j)
+			address = CharacterAddress.query.filter_by(file_id=i.id)
+			for a in address:
+				db.session.delete(a)
+			chara = CharacterFile.query.filter_by(file_id=i.id)
+			for c in chara:
+				db.session.delete(c)
 			db.session.delete(i)
 		db.session.delete(current_user)
 		db.session.commit()
@@ -199,8 +221,29 @@ def deletecharacter(file_id):
 	form= DeleteForm()
 	file= Files.query.filter_by(id=file_id).first()
 	if form.yes.data:
-		fileData= Files.query.filter_by(id=file_id).first()
-		db.session.delete(fileData)
+		i= Files.query.filter_by(id=file_id).first()
+		scars = Scars.query.filter_by(file_id=i.id)
+			for scar in scars:
+				db.session.delete(scar)
+			tattoos= Tattoos.query.filter_by(file_id=i.id)
+			for tattoo in tattoos:
+				db.session.delete(tattoo)
+			skills= Skills.query.filter_by(file_id=i.id)
+			for skill in skills:
+				db.session.delete(skill)
+			magical= Magical.query.filter_by(file_id=i.id)
+			for magic in magical:
+				db.session.delete(magic)
+			R= Relationships.query.filter_by(file_id=i.id)
+			for j in R:
+				db.session.delete(j)
+			address = CharacterAddress.query.filter_by(file_id=i.id)
+			for a in address:
+				db.session.delete(a)
+			chara = CharacterFile.query.filter_by(file_id=i.id)
+			for c in chara:
+				db.session.delete(c)
+		db.session.delete(i)
 		db.session.commit()
 		return redirect(url_for('account'))	
 	return render_template('deletefile.html',title='Delete File Page', form=form)
@@ -481,8 +524,8 @@ def magical(file_id):
 @login_required
 def search(file_id):
 	file= Files.query.filter_by(id=file_id)
-	fileData=Files.query.filter_by(file_name=file.file_name)
-	return render_template('search.html', title='Search')
+	return render_template('search.html', title='Search', file=file
+		)
 
 
 @login_manager.user_loader

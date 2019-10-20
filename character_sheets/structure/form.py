@@ -405,8 +405,8 @@ class MagicalForm(FlaskForm):
 
 
 class SearchForm(FlaskForm):
-    cycle=[]
-    name_dropdown= SelectField('What file do you want to look at?', choices=cycle)
+    cycle=[('Select','Select')]
+    listed= SelectField('What file do you want to look at?', choices=cycle)
     go = SubmitField('Go')
 
 @login_manager.user_loader
