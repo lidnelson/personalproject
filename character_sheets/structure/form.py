@@ -6,6 +6,7 @@ from structure import bcrypt, login_manager
 from structure.model import Users, Files
 
 
+
 class RegistrationForm(FlaskForm):
 	first_name = StringField('First Name',
 		validators=[
@@ -405,7 +406,7 @@ class MagicalForm(FlaskForm):
 
 
 class SearchForm(FlaskForm):
-    cycle=[('Select','Select')]
+    cycle=[]
     listed= SelectField('What file do you want to look at?', choices=cycle)
     go = SubmitField('Go')
 

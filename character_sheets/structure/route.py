@@ -5,6 +5,7 @@ from structure.model import Alignment, Users, Files, CharacterFile, Scars, Tatto
 from structure.form import SearchForm, ScarsForm, TattoosForm, AddressForm, RegistrationForm, LoginForm, UpdateAccountForm, FilesForm, CharacterForm,  MagicalForm, DeleteForm, SkillsForm, RelationshipForm
 
 tempFormData = ""
+cycle=[]
 
 @app.route('/')
 @app.route('/home')
@@ -69,24 +70,26 @@ def updateaccount():
 		form.email.data = current_user.email
 	return render_template('updateaccount.html', title='Update Account', form=form)
 
-@app.route('/account')
+@app.route('/account', methods=['GET', 'POST'])
 @login_required
 def account():
-	fileData=Files.query.filter_by(user_id=current_user.id)
-	form= SearchForm()
-	cycle = []
-	for field in form:
-		if field.type == 'SelectField':
-			field.choices = cycle
-	for file in fileData:
-		cycle.append((file.file_name, file.file_name))
-	form.listed.choices = cycle
-	if form.go.data:
-		print(form.listed.data)
-		print('//////////////////////////')
-		temp=Files.query.filter_by(file_name=str(form.listed.data)).first()
-		file_id=temp.id
-		return redirect(url_for('search', file_id=file_id))
+	fileData=Files.query.filter_by(user_id=current_user.id).all()
+	form = SearchForm()
+	cycle =[]
+	print(fileData)
+	if fileData:
+		for field in form:
+			if field.type == 'SelectField':
+				field.choices = cycle
+		for file in fileData:
+			cycle.append((file.file_name, file.file_name))
+		form.listed.choices = cycle
+		if form.go.data:
+			print(form.listed.data)
+			print('//////////////////////////')
+			temp=Files.query.filter_by(file_name=str(form.listed.data)).first()
+			file_id=temp.id
+			return redirect(url_for('characterpage', file_id=file_id))
 	return render_template('account.html', title = 'Account', file=fileData, form=form)
 
 @app.route('/account/createfile', methods=['GET','POST'])
@@ -223,26 +226,26 @@ def deletecharacter(file_id):
 	if form.yes.data:
 		i= Files.query.filter_by(id=file_id).first()
 		scars = Scars.query.filter_by(file_id=i.id)
-			for scar in scars:
-				db.session.delete(scar)
-			tattoos= Tattoos.query.filter_by(file_id=i.id)
-			for tattoo in tattoos:
-				db.session.delete(tattoo)
-			skills= Skills.query.filter_by(file_id=i.id)
-			for skill in skills:
-				db.session.delete(skill)
-			magical= Magical.query.filter_by(file_id=i.id)
-			for magic in magical:
-				db.session.delete(magic)
-			R= Relationships.query.filter_by(file_id=i.id)
-			for j in R:
-				db.session.delete(j)
-			address = CharacterAddress.query.filter_by(file_id=i.id)
-			for a in address:
-				db.session.delete(a)
-			chara = CharacterFile.query.filter_by(file_id=i.id)
-			for c in chara:
-				db.session.delete(c)
+		for scar in scars:
+			db.session.delete(scar)
+		tattoos= Tattoos.query.filter_by(file_id=i.id)
+		for tattoo in tattoos:
+			db.session.delete(tattoo)
+		skills= Skills.query.filter_by(file_id=i.id)
+		for skill in skills:
+			db.session.delete(skill)
+		magical= Magical.query.filter_by(file_id=i.id)
+		for magic in magical:
+			db.session.delete(magic)
+		R= Relationships.query.filter_by(file_id=i.id)
+		for j in R:
+			db.session.delete(j)
+		address = CharacterAddress.query.filter_by(file_id=i.id)
+		for a in address:
+			db.session.delete(a)
+		chara = CharacterFile.query.filter_by(file_id=i.id)
+		for c in chara:
+			db.session.delete(c)
 		db.session.delete(i)
 		db.session.commit()
 		return redirect(url_for('account'))	
@@ -520,12 +523,7 @@ def magical(file_id):
 			return redirect(url_for('characterpage', file_id=file_id))
 	return render_template('magical.html', title='Magical Abilities form', form=form)
 
-@app.route('/account/file/search/<int(min=1):file_id>')
-@login_required
-def search(file_id):
-	file= Files.query.filter_by(id=file_id)
-	return render_template('search.html', title='Search', file=file
-		)
+
 
 
 @login_manager.user_loader
