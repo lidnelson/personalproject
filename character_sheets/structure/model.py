@@ -39,12 +39,12 @@ class Files(db.Model):
 
 
 class CharacterFile(db.Model):
- 	id = db.Column(db.Integer, primary_key=True)
- 	file_id = db.Column(db.Integer, db.ForeignKey('files.id'), nullable=False)
- 	eye_colour=db.Column(db.String(10))
- 	scars= db.Column(db.Boolean, default=False)
- 	tattoos = db.Column(db.Boolean, default=False)
- 	pet_peeves = db.Column(db.String(10000))
+	id = db.Column(db.Integer, primary_key=True)
+	file_id = db.Column(db.Integer, db.ForeignKey('files.id'), nullable=False)
+	eye_colour=db.Column(db.String(10))
+	scars= db.Column(db.Boolean, default=False)
+	tattoos = db.Column(db.Boolean, default=False)
+	pet_peeves = db.Column(db.String(10000))
 	hobbies = db.Column(db.String(10000))
 	alignment = db.Column(db.String(20))
 	accent = db.Column(db.String(50))
@@ -74,11 +74,11 @@ class CharacterFile(db.Model):
 	magical_abilities= db.Column(db.Boolean, default=False)
 	improvements = db.Column(db.String(1000))
 
- 	def __repr__(self):
- 		return ''.join([
- 			'Eye colour: ', str(self.eye_colour), '\r\n',
- 			'Character has scars: ', self.scars, '\r\n',
- 			'character has tattoos: ', self.tattoos,
+	def __repr__(self):
+		return ''.join([
+			'Eye colour: ', str(self.eye_colour), '\r\n',
+			'Character has scars: ', self.scars, '\r\n',
+			'character has tattoos: ', self.tattoos,
 			'Pet-peeves: ', self.pet_peeves, '\r\n',
 			'Hobbies: ', self.hobbies, '\r\n',
 			'Alignment: ', str(self.alignment), '\r\n',
