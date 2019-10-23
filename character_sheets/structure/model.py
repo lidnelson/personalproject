@@ -27,7 +27,7 @@ class Files(db.Model):
 	character_first_name = db.Column(db.String(30), nullable=False)
 	character_last_name = db.Column(db.String(30), nullable=False)
 	character_description = db.Column(db.String(10000))
-	date_used = db.Column(db.DateTime, nullable=False, default=datetime.now)
+	date_used = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 	author_file = db.Column(db.String(100), nullable=False)
 
 	user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)

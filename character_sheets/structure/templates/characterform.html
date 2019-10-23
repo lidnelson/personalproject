@@ -55,18 +55,13 @@
 				</div>
 			{% endif %}
 	    </div><br>
+      	<p style='color:black'>Alignment Menu</p>
+      	{% for a in alignment %}
+      		<p style='color:{{ a.colour }}'>{{ a.name }} - {{ a.description }}</p>
+      	{% endfor %}
 	    <div class="form-group">
 	      	<!-- give an expliation to each alignment -->
-	      	<p style='color:black'>Alignment Menu</p>
-	      	<p style='color:teal'>Lawful Good - I want to do the right thing, and follow society's rules in the best way possible</p>
-	      	<p style='color:green'>Neutral Good - I want to do what's right, and I am willing to break the rules as long as no one gets hurt</p>
-	      	<p style='color:purple'>Chaotic Good - I'm willing to do whatever it takes as long as it's to do the right thing</p>
-	      	<p style='color:pink'>Lawful Neutral - Following the rules of society is the most important thing, and that matters more to me than doing what's right</p>
-	      	<p style='color:orange'>True Neutral - I just want myself and the people I care about to be happy</p>
-	      	<p style='color:#FFD200'>Chaotic Neutral - I want my freedom, and i don't care what i have to do to keep it </p>
-	      	<p style='color:lightgrey'>Lawful Evil - To impede the protagonists (in whatever evil way) is my primary goal, but I follow my own code of morals even when it's inconvenient</p>
-	      	<p style='color:blue'>Neutral Evil - To impede the protagonist (in whatever evil way) is my primary goal, and while I'll do what it takes to achieve it, I also won't go out of my way to do unnecessary damage</p>
-	      	<p style='color:red'>Chaotic Evil - i relish in destruction and want to do as much damage as possible while i try to achievemy primary goal</p> 
+	      	
 	      	{{ form.alignment.label }}
 	      	{{ form.alignment }}
 

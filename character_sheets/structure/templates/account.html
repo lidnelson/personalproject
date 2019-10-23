@@ -29,11 +29,11 @@
 		<p>For {{ file.project }} project </p>
 		<p>Description: {{ file.character_description }}</p>
 		<p>Creator: {{ file.author_file }}</p>
-		<p>Last Updated: {{ file.date_used }}</p>
+		<p>Last Updated: {{ file.date_used.strftime('%d/%m/%y %H:%M') }}</p>
 		<div align="right">	
 			<span><a href='/account/file/{{ file.id }}/delete'>Delete</a></span>
-			<span><a href='/account/file/{{ file_id }}/edit_file_name'>Edit File</a></span>
-			<span><a href='/account/file/{{ file_id }}/edit_character'>Edit Character</a></span>
+			<span><a href='/account/file/{{ file.id }}/edit_file_name'>Edit File</a></span>
+			<span><a href='/account/file/{{ file.id }}/edit_character'>Edit Character</a></span>
 			<span><a href='/account/file/{{ file.id }}'>Characters Page</a></span>
 		</div>
 	</div>
