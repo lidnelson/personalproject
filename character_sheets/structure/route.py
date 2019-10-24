@@ -181,6 +181,7 @@ def characterpage(file_id):
 	magic = Magical.query.filter_by(file_id=file_id).all()
 	relationship= Relationships.query.filter_by(file_id=file_id).all()
 	alignment = Alignment.query.filter_by(name=characterData.alignment).first()
+	print(alignment)
 	return render_template('characterpage.html', title="Charater page",a=alignment, scars=scars, tattoos=tattoos, address=address, skills=skill, magical=magic, relationships=relationship,file1=characterData, file=fileData)
 
 @app.route('/account/delete', methods=['GET','POST'])
