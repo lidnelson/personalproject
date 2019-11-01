@@ -36,8 +36,9 @@ In a virtual box
 *Remember when creating the VM in gcp to tick both the HTTP and HTTPS traffic*
 
 ### SystemD
-
-
+1. Run the systemd.sh script 
+2. Navigate to http://<External IP address>:5000/  
+    
 ### Docker
 
 ## Building the App
