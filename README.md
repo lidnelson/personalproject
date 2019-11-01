@@ -31,13 +31,13 @@ In a virtual box
 
 #### Using google cloud platform 
 
-3. Navigate to http://<External IP address>:5000/  
+3. Navigate to http://{{ External IP address }}:5000/  
     
 *Remember when creating the VM in gcp to tick both the HTTP and HTTPS traffic*
 
 ### SystemD
 1. Run the systemd.sh script 
-2. Navigate to http://<External IP address>:5000/  
+2. Navigate to http://{{ External IP address }}:5000/  
     
 ### Docker
 
