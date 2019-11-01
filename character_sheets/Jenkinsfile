@@ -3,7 +3,7 @@ pipeline{
         stages{
           stage('---Build_Image---'){
                           steps{
-                              sh "sudo docker build -t charagen ."
+                              sh "sudo docker build -t charagen -f .character_sheets/Dockerfile ."
                          }
                   }
                   stage('---clean---'){
